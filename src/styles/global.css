@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/* Fondo global */
+html, body {
+  @apply min-h-full;
+}
+
+body {
+  background: #000000;
+  background-attachment: fixed;
+}
+
+/* Líneas de gradiente decorativas */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(168, 85, 247, 0.1) 20%, transparent 40%),
+    linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.1) 30%, transparent 60%),
+    linear-gradient(45deg, transparent 0%, rgba(236, 72, 153, 0.05) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Líneas de gradiente adicionales */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(135deg, rgba(168, 85, 247, 0.03) 0%, transparent 25%),
+    linear-gradient(225deg, rgba(59, 130, 246, 0.03) 0%, transparent 25%),
+    linear-gradient(315deg, rgba(236, 72, 153, 0.02) 0%, transparent 25%);
+  pointer-events: none;
+  z-index: -1;
+}
