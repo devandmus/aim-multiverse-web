@@ -1,18 +1,66 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import Music from "../components/Music.astro";
-import Projects from "../components/Projects.astro";
-import Services from "../components/Services.astro";
-import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";  
+import NeonBox from "../components/atoms/NeonBox.astro";
+import Gradients from "../components/skeleton/Gradients.astro";
+import NeonButton from "../components/atoms/NeonButton.astro";
 ---
 
 <BaseLayout title="Andrés Ignacio Maldonado | Tech Lead • AI • Música">
-  <Hero />
-  <About />
-  <Music />
-  <Projects />
-  <Services />
-  <Footer />
+  <div class="p-12">
+  <NeonBox class="max-w-5xl mx-auto border-1">
+    <!-- Hero section -->
+    <div class="p-12">
+      <Hero />
+    </div>
+
+    <!-- About section -->
+    <NeonBox class="border-t-1 border-b-1">
+      <div class="grid grid-cols-1 md:grid-cols-2 max-w-5xl">
+        <div class="p-12">
+          <div class="p-12 flex items-center justify-center h-full">
+            <p class="text-lg md:text-xl lg:text-2xl text-gray-300 font-mono tracking-wide">
+              Soy Tech Lead en WOM, consultor en Gen Al, creador de contenldo y musico profesional. Croe en la te-chologia cono motor creativo y en el arte come fuerza
+            </p>
+          </div>
+        </div>
+        <NeonBox class="border-l-1">
+          <div>
+            <h2 class="text-3xl font-bold mb-4 font-mono absolute top-6 left-15 z-10">ABOUT</h2>
+            <Gradients ltrbtu={false} />
+            <figure>
+              <img src="/images/andres-macbook.jpg" alt="Andrés Ignacio Maldonado" class="rounded-lg" />
+            </figure>
+          </div>
+        </NeonBox>
+      </div>
+    </NeonBox>
+
+    <!-- Music section -->
+    <NeonBox class="">
+      <div class="max-w-5xl p-12">
+        <h2 class="text-3xl font-bold font-mono pb-6">CREATIVIDAD</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div class="">
+            <div>
+              <NeonBox class=" border-b-1 border-r-1 rounded-br-lg rounded-tr-lg ">
+                  <figure class="font-0">
+                    <img src="/images/andres-guitarra.jpeg" alt="Andrés Ignacio Maldonado" class="font-0 rounded-tr-lg rounded-tl-lg"/>
+                  </figure>
+                  <div class="px-4 py-6">
+                    <NeonButton label="@devandmus - RRSS" href="/music" color="cyan" class="mb-4" />
+                    <NeonButton label="Guitar Licks - TikTok" href="/music" color="pink" class="mb-4" />
+                    <NeonButton label="One Lick a Day - YouTube" href="/music" color="purple" />
+                  </div>
+              </NeonBox>
+              
+            </div>
+          </div>
+          
+          <div class="p-12">jasdasdasd</div>
+  
+        </div>
+    </NeonBox>
+  </div>
 </BaseLayout>
+

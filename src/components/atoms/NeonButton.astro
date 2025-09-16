@@ -1,0 +1,71 @@
+---
+interface Props {
+  label: string;
+  href: string;
+  color: "pink" | "purple" | "cyan" | "yellow";
+  class?: string;
+}
+const { label = "Botón", href = "#", color = "pink", class: className = "" } = Astro.props;
+
+// Usar los colores del tema neón
+const gradients = {
+  pink: "linear-gradient(90deg, #FF00A0, #ff4ecb)",
+  purple: "linear-gradient(90deg, #A020F0, #6d28d9)",
+  cyan: "linear-gradient(90deg, #00FFF7, #0284c7)",
+  yellow: "linear-gradient(90deg, #F8F32B, #fbbf24)",
+};
+---
+
+<div class={className}>
+    <a href={href} class="neon-button" style={`--border-gradient: ${gradients[color]};`}>
+  {label}
+</a>
+</div>
+
+<style>
+  .neon-button {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--base-light);
+    background: var(--base-dark);
+    text-decoration: none;
+    position: relative;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+
+    /* borde degradado usando colores del tema */
+    background-image: linear-gradient(var(--base-dark), var(--base-dark)),
+      var(--border-gradient);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  .neon-button:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Efectos específicos por color */
+  .neon-button[style*="pink"]:hover {
+    box-shadow: 0 0 20px rgba(255, 0, 160, 0.8),
+                0 0 30px rgba(255, 0, 160, 0.6);
+  }
+
+  .neon-button[style*="purple"]:hover {
+    box-shadow: 0 0 20px rgba(160, 32, 240, 0.8),
+                0 0 30px rgba(160, 32, 240, 0.6);
+  }
+
+  .neon-button[style*="cyan"]:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 247, 0.8),
+                0 0 30px rgba(0, 255, 247, 0.6);
+  }
+
+  .neon-button[style*="yellow"]:hover {
+    box-shadow: 0 0 20px rgba(248, 243, 43, 0.8),
+                0 0 30px rgba(248, 243, 43, 0.6);
+  }
+</style>

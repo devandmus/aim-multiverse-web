@@ -1,0 +1,31 @@
+---
+interface Props {
+    top?: boolean;
+    left?: boolean;
+    right?: boolean;
+    bottom?: boolean;
+    padding?: string;
+}
+const { top = true, left = true, right = true, bottom = true, padding = 'p-6'} = Astro.props;
+---
+<section class="relative flex items-center justify-center {padding} w-full">
+  <!-- Líneas de gradiente decorativas -->
+  <div class="absolute inset-0 overflow-hidden">
+    <!-- Línea horizontal superior -->
+     {top && <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>}
+
+    <!-- Línea vertical izquierda -->
+    {left && <div class="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500/30 to-transparent"></div>}
+
+    <!-- Línea vertical derecha -->
+    {right && <div class="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500/30 to-transparent"></div>}
+  
+    <!-- Línea diagonal -->
+    <div class="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-500/40 to-transparent transform -rotate-12"></div>
+
+    <!-- Línea horizontal inferior -->
+    {bottom && <div class="absolute bottom-0 right-0 w-full h-px bg-gradient-to-l from-transparent via-cyan-500/50 to-transparent"></div>}
+  </div>
+  <!-- Contenido principal -->
+  <slot />
+</section>

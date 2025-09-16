@@ -1,0 +1,42 @@
+---
+interface Props {
+    class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class={`neon-box ${className}`}>
+  <slot />
+</div>
+
+<style>
+  .neon-box {
+    position: relative;
+    z-index: 0;
+
+    /* Borde neon */
+    border-color: transparent;
+    border-style: solid;
+    background-image: linear-gradient(#000000, #000000),
+      linear-gradient(
+        135deg,
+        #ff00a0,
+        #00fff7,
+        #a020f0,
+        #f8f32b
+      );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+    /* Animación del gradiente */
+    animation: neon-move 6s linear infinite;
+    background-size: 300% 300%;
+  }
+
+  @keyframes neon-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+interface Props {
+  top?: boolean;
+  left?: boolean;
+  right?: boolean;
+  bottom?: boolean;
+  ltrbtu?: boolean;
+  topMargin?: string;
+  leftMargin?: string;
+  rightMargin?: string;
+  bottomMargin?: string;
+}
+const { 
+  top = true, 
+  left = true, 
+  right = true, 
+  bottom = true, 
+  ltrbtu = true,
+  topMargin = 'top-10',
+  leftMargin = 'left-10',
+  rightMargin = 'right-10',
+  bottomMargin = 'bottom-10'
+} = Astro.props;
+---
+
+<!-- Líneas de gradiente decorativas -->
+  <div class="absolute inset-0">
+    <!-- Línea horizontal superior -->
+    {top && <div class={`absolute ${topMargin} left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent`}></div>}
+    
+    <!-- Línea vertical izquierda -->
+    {left && <div class={`absolute ${leftMargin} top-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500/30 to-transparent`}></div>}
+    
+    <!-- Línea diagonal (FIJA - no dinámica) -->
+    {ltrbtu && <div class="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-500/40 to-transparent transform -rotate-12"></div>}
+    
+    <!-- Línea vertical derecha -->
+    {right && <div class={`absolute ${rightMargin} top-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500/30 to-transparent`}></div>}
+
+    <!-- Línea horizontal inferior -->
+    {bottom && <div class={`absolute ${bottomMargin} right-0 w-full h-px bg-gradient-to-l from-transparent via-cyan-500/50 to-transparent`}></div>}
+  </div>

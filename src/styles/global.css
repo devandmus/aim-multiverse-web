@@ -1,43 +1,115 @@
 @import "tailwindcss";
 
-/* Fondo global */
+/* Variables CSS para colores y gradientes */
+:root {
+  /* Colores base */
+  --base-dark: #0D0D0F;
+  --base-light: #F5F5F5;
+  --base-grey: #9CA3AF;
+  
+  /* Colores neón */
+  --neon-yellow: #F8F32B;
+  --neon-cyan: #00FFF7;
+  --neon-pink: #FF00A0;
+  --neon-purple: #A020F0;
+  
+  /* Gradientes */
+  --multiverse-bg: linear-gradient(90deg, transparent 0%, rgba(168, 85, 247, 0.1) 20%, transparent 40%), linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.1) 30%, transparent 60%), linear-gradient(45deg, transparent 0%, rgba(236, 72, 153, 0.05) 50%, transparent 70%);
+  --multiverse-overlay: linear-gradient(135deg, rgba(168, 85, 247, 0.03) 0%, transparent 25%), linear-gradient(225deg, rgba(59, 130, 246, 0.03) 0%, transparent 25%), linear-gradient(315deg, rgba(236, 72, 153, 0.02) 0%, transparent 25%);
+}
+
+/* Clases personalizadas para colores neón */
+.text-neon-cyan {
+  color: var(--neon-cyan);
+}
+
+.text-neon-pink {
+  color: var(--neon-pink);
+}
+
+.text-neon-yellow {
+  color: var(--neon-yellow);
+}
+
+.text-neon-purple {
+  color: var(--neon-purple);
+}
+
+.bg-neon-cyan {
+  background-color: var(--neon-cyan);
+}
+
+.bg-neon-pink {
+  background-color: var(--neon-pink);
+}
+
+.bg-neon-yellow {
+  background-color: var(--neon-yellow);
+}
+
+.bg-neon-purple {
+  background-color: var(--neon-purple);
+}
+
+.border-neon-cyan {
+  border-color: var(--neon-cyan);
+}
+
+.border-neon-pink {
+  border-color: var(--neon-pink);
+}
+
+.border-neon-yellow {
+  border-color: var(--neon-yellow);
+}
+
+.border-neon-purple {
+  border-color: var(--neon-purple);
+}
+
+/* Colores base */
+.bg-base-dark {
+  background-color: var(--base-dark);
+}
+
+.bg-base-light {
+  background-color: var(--base-light);
+}
+
+.bg-base-grey {
+  background-color: var(--base-grey);
+}
+
+.text-base-dark {
+  color: var(--base-dark);
+}
+
+.text-base-light {
+  color: var(--base-light);
+}
+
+.text-base-grey {
+  color: var(--base-grey);
+}
+
+/* Fondo global usando clases de Tailwind */
 html, body {
   @apply min-h-full;
 }
 
 body {
-  background: #000000;
-  background-attachment: fixed;
+  @apply bg-fixed;
+  background-color: black;
 }
-
-/* Líneas de gradiente decorativas */
+/* 
 body::before {
   content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(90deg, transparent 0%, rgba(168, 85, 247, 0.1) 20%, transparent 40%),
-    linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.1) 30%, transparent 60%),
-    linear-gradient(45deg, transparent 0%, rgba(236, 72, 153, 0.05) 50%, transparent 70%);
-  pointer-events: none;
-  z-index: -1;
+  @apply fixed inset-0 pointer-events-none -z-10;
+  background: var(--multiverse-bg);
 }
 
-/* Líneas de gradiente adicionales */
 body::after {
   content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(135deg, rgba(168, 85, 247, 0.03) 0%, transparent 25%),
-    linear-gradient(225deg, rgba(59, 130, 246, 0.03) 0%, transparent 25%),
-    linear-gradient(315deg, rgba(236, 72, 153, 0.02) 0%, transparent 25%);
-  pointer-events: none;
-  z-index: -1;
-}
+  @apply fixed inset-0 pointer-events-none -z-10;
+  background: var(--multiverse-overlay);
+} */
