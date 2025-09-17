@@ -1,0 +1,83 @@
+/* Activa view transitions */
+@view-transition {
+    navigation: auto;
+}
+
+/* Animación básica para nuestro scope */
+::view-transition-old(card),
+::view-transition-new(card) {
+    animation-duration: 600ms;
+    animation-timing-function: ease-in-out;
+}
+
+
+
+/* SOLUCIÓN CSS PURA - Preservación automática de scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efectos de transición */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 400ms forwards;
+    animation-delay: 200ms;
+}
+
+/* Estilos iniciales */
+.btn {
+    view-transition-name: frame;
+    border: 2px solid #ff00a0;
+    border-radius: 8px;
+    padding: 12px 24px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: rgba(255, 0, 160, 0.1);
+    transform: translateY(-2px);
+}
+
+.box {
+    view-transition-name: frame;
+    border: 2px solid #ff00a0;
+    border-radius: 16px;
+    padding: 40px;
+    width: 80%;
+    margin: 40px auto;
+    background: transparent;
+    color: white;
+}
+
+/* Transición del borde y del wrapper */
+::view-transition-old(frame),
+::view-transition-new(frame) {
+    animation: morphFrame 600ms cubic-bezier(.2, 0, 0, 1);
+}
+
+@keyframes morphFrame {
+    from {
+        border-radius: 8px;
+        border-color: #ff00a0;
+    }
+
+    to {
+        border-radius: 16px;
+        border-color: #ff00a0;
+    }
+}

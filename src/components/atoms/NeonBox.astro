@@ -1,31 +1,63 @@
 ---
 interface Props {
-    class?: string;
+  class?: string;
+  noBorderLeft?: boolean;
+  noBorderRight?: boolean;
+  noBorderTop?: boolean;
+  noBorderBottom?: boolean;
+  borderWidth?: string;
+  transitionName?: string;
 }
 
-const { class: className = "" } = Astro.props;
+const {
+  class: className = "",
+  noBorderLeft = false,
+  noBorderRight = false,
+  noBorderTop = false,
+  noBorderBottom = false,
+  transitionName = "",
+} = Astro.props;
+
+const suppressClasses = [];
+if (noBorderLeft) suppressClasses.push("no-border-left");
+if (noBorderRight) suppressClasses.push("no-border-right");
+if (noBorderTop) suppressClasses.push("no-border-top");
+if (noBorderBottom) suppressClasses.push("no-border-bottom");
+const borderClass = `${suppressClasses.join(" ")} ${className}`;
 ---
 
-<div class={`neon-box ${className}`}>
-  <slot />
+<div class={`neon-wrapper ${className}`}>
+  <div
+    class={`neon-box ${borderClass} ${className}`}
+    style={transitionName && `view-transition-name: ${transitionName}`}
+  >
+  </div>
+  <div class={`neon-content ${borderClass}`}>
+    <slot />
+  </div>
 </div>
 
 <style>
-  .neon-box {
+  .neon-wrapper {
     position: relative;
+    display: inline-block;
+    background-color: #000000;
+  }
+
+  .neon-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 0;
 
+    /* Todos los bordes activos por defecto */
+    border: 1px solid transparent;
+
     /* Borde neon */
-    border-color: transparent;
-    border-style: solid;
     background-image: linear-gradient(#000000, #000000),
-      linear-gradient(
-        135deg,
-        #ff00a0,
-        #00fff7,
-        #a020f0,
-        #f8f32b
-      );
+      linear-gradient(135deg, #ff00a0, #00fff7, #a020f0, #f8f32b);
     background-origin: border-box;
     background-clip: padding-box, border-box;
 
@@ -34,9 +66,41 @@ const { class: className = "" } = Astro.props;
     background-size: 300% 300%;
   }
 
+  /* Suprimir bordes específicos */
+  .neon-box.no-border-left,
+  .neon-content.no-border-left {
+    border-left: none;
+  }
+
+  .neon-box.no-border-right,
+  .neon-content.no-border-right {
+    border-right: none;
+  }
+
+  .neon-box.no-border-top,
+  .neon-content.no-border-top {
+    border-top: none;
+  }
+
+  .neon-box.no-border-bottom,
+  .neon-content.no-border-bottom {
+    border-bottom: none;
+  }
+
+  .neon-content {
+    position: relative;
+    border: 1px solid transparent;
+  }
+
   @keyframes neon-move {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 </style>

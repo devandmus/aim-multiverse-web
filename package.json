@@ -4,13 +4,24 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npm run generate-search-index",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-search-index": "node src/scripts/generate-search-index.js"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/markdown-remark": "^6.3.6",
+    "@astrojs/mdx": "^4.3.5",
     "@tailwindcss/vite": "^4.1.13",
     "astro": "^5.13.7",
-    "tailwindcss": "^4.1.13"
+    "date-fns": "^4.1.0",
+    "fuse.js": "^7.1.0",
+    "gray-matter": "^4.0.3",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2"
   }
 }

@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getLatestPost, getColorByCategory, getPostUrl } from "../../lib/blog";
+
+// Obtener el artículo más reciente del blog
+const latestPost = await getLatestPost();
+---
+
+<BaseLayout title="Ejemplo">
+    <h1>Ejemplo</h1>
+    <p>Este es un ejemplo de un artículo.</p>
+    <div>
+        Keys: {latestPost && Object.keys(latestPost).join(", ")}
+    </div>
+    <div>
+        ID: {latestPost?.id}
+    </div>
+    <div>
+        TITLE: {latestPost?.data.title}
+    </div>
+    <div>
+        TAGS: {latestPost?.data.tags}
+    </div>
+    <div>
+        CATEGORY: {latestPost?.data.category}
+    </div>
+    <div>
+        <div>
+            READING TIME: {latestPost?.data.readingTime}
+        </div>
+        <div>
+            DATE: {latestPost?.data.date}
+        </div>
+        <div>
+            DESCRIPTION: {latestPost?.data.description}
+        </div>
+        <div>
+            IMAGE: {latestPost?.data.image}
+        </div>
+        <div>
+            SLUG: {latestPost?.slug}
+        </div>
+        <div>
+            URL: {latestPost?.url}
+        </div>
+        <div>
+            DRAFT: {latestPost?.data.draft}
+        </div>
+        <div>
+            FEATURED: {latestPost?.data.featured}
+        </div>
+        <div>
+            AUTHOR: {latestPost?.data.author}
+        </div>
+        <div>
+            SOURCE: {latestPost?.data.source}
+        </div>
+        <div>
+            SOURCE URL: {latestPost?.data.sourceUrl}
+        </div>
+        <div>
+            SOURCE DATE: {latestPost?.data.sourceDate}
+        </div>
+        <div>
+            SOURCE AUTHOR: {latestPost?.data.sourceAuthor}
+        </div>
+        <div>
+            SOURCE TITLE: {latestPost?.data.sourceTitle}
+        </div>
+        <div>
+            SOURCE DESCRIPTION: {latestPost?.data.sourceDescription}
+        </div>
+        <div>
+            SOURCE IMAGE: {latestPost?.data.sourceImage}
+        </div>
+    </div>
+</BaseLayout>

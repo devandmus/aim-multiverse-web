@@ -1,0 +1,43 @@
+# Template de Métricas KPIs para Asistentes de IA
+
+## KPIs Operativos
+
+### Performance del Asistente
+- **Response Time**: Tiempo promedio de respuesta
+- **Accuracy**: Porcentaje de respuestas correctas
+- **Escalation Rate**: % de casos que requieren intervención humana
+- **User Satisfaction**: Puntuación promedio de satisfacción
+
+### Adopción y Uso
+- **Daily Active Users**: Usuarios únicos diarios
+- **Session Duration**: Tiempo promedio de sesión
+- **Completion Rate**: % de consultas resueltas sin escalación
+- **Return Rate**: % de usuarios que vuelven a usar el asistente
+
+## KPIs de Negocio
+
+### Eficiencia
+- **Time Saved**: Horas ahorradas por automatización
+- **Cost Reduction**: Reducción de costos operativos
+- **Process Speed**: Velocidad de procesos automatizados
+- **Error Reduction**: Reducción de errores humanos
+
+### Impacto en Clientes
+- **Customer Satisfaction**: NPS o CSAT
+- **Resolution Time**: Tiempo para resolver consultas
+- **First Contact Resolution**: % resuelto en primera interacción
+- **Customer Retention**: Retención de clientes
+
+## Métricas de ROI
+
+### Financieras
+- **ROI**: Retorno de inversión
+- **Payback Period**: Tiempo de recuperación
+- **Cost per Interaction**: Costo por interacción
+- **Revenue Impact**: Impacto en ingresos
+
+### Estratégicas
+- **Strategic Goal Achievement**: Progreso hacia objetivos estratégicos
+- **Competitive Advantage**: Ventaja competitiva ganada
+- **Innovation Index**: Índice de innovación
+- **Digital Transformation Progress**: Progreso en transformación digital

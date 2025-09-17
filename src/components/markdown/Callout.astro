@@ -1,0 +1,70 @@
+---
+export interface Props {
+    type?: "info" | "warning" | "success" | "error" | "tip";
+    title?: string;
+    icon?: boolean;
+}
+
+const { type = "info", title, icon = true } = Astro.props;
+
+const typeConfig = {
+    info: {
+        bg: "bg-blue-900/20",
+        border: "border-blue-500",
+        text: "text-blue-300",
+        icon: "ℹ️",
+        defaultTitle: "Información",
+    },
+    warning: {
+        bg: "bg-yellow-900/20",
+        border: "border-yellow-500",
+        text: "text-yellow-300",
+        icon: "⚠️",
+        defaultTitle: "Advertencia",
+    },
+    success: {
+        bg: "bg-green-900/20",
+        border: "border-green-500",
+        text: "text-green-300",
+        icon: "✅",
+        defaultTitle: "Éxito",
+    },
+    error: {
+        bg: "bg-red-900/20",
+        border: "border-red-500",
+        text: "text-red-300",
+        icon: "❌",
+        defaultTitle: "Error",
+    },
+    tip: {
+        bg: "bg-neon-cyan/10",
+        border: "border-neon-cyan",
+        text: "text-neon-cyan",
+        icon: "💡",
+        defaultTitle: "Consejo",
+    },
+};
+
+const config = typeConfig[type];
+const displayTitle = title || config.defaultTitle;
+---
+
+<div class={`callout ${config.bg} ${config.border} border rounded-xl p-4 mb-6`}>
+    <div class="flex items-start gap-3">
+        {
+            icon && (
+                <div class={`${config.text} text-lg flex-shrink-0 mt-0.5`}>
+                    {config.icon}
+                </div>
+            )
+        }
+        <div class="flex-1">
+            <h4 class={`${config.text} font-semibold mb-2`}>
+                {displayTitle}
+            </h4>
+            <div class={`${config.text} text-sm`}>
+                <slot />
+            </div>
+        </div>
+    </div>
+</div>

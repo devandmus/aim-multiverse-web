@@ -1,0 +1,200 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NeonBox from "../components/atoms/NeonBox.astro";
+import Gradients from "../components/skeleton/Gradients.astro";
+import NeonButton from "../components/atoms/NeonButton.astro";
+import Wrapper from "../components/skeleton/Wrapper.astro";
+import SearchBox from "../components/SearchBox.astro";
+import {
+  getAllPosts,
+  getFeaturedPosts,
+  getRandomSuggestions,
+  getColorByCategory,
+  getPostUrl,
+} from "../lib/blog";
+import RelatedArticles from "../components/RelatedArticles.astro";
+import FeaturedArticleCard from "../components/cards/FeaturedArticleCard.astro";
+
+// Obtener artículos para mostrar en el blog
+const allPosts = await getAllPosts();
+const publishedPosts = allPosts;
+
+// Obtener artículo destacado
+const featuredPosts = await getFeaturedPosts();
+const featuredPost = featuredPosts[0]; // Tomar el primero si hay múltiples
+const regularPosts = publishedPosts.filter((post) => !post.data.featured);
+
+// Obtener artículos para sugerencias aleatorias
+const randomSuggestions = getRandomSuggestions(allPosts, undefined, 6);
+---
+
+<BaseLayout
+  title="Blog | Andrés Ignacio Maldonado"
+  description="Artículos, ideas y casos reales sobre tecnología, liderazgo y música"
+>
+  <Wrapper>
+    <NeonBox class="max-w-6xl mx-auto border-1" transitionName="blog-page">
+      <div class="fade-in">
+        <!-- Header del Blog -->
+        <div class="p-12">
+          <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between mb-8"
+          >
+            <div>
+              <h1 class="text-5xl md:text-6xl font-bold mb-4 text-base-light">
+                Blog
+              </h1>
+              <p class="text-xl text-base-grey">
+                Artículos, ideas y casos reales
+              </p>
+            </div>
+
+            <div class="mt-6 md:mt-0">
+              <div class="flex items-center gap-4 mb-4">
+                <span class="text-sm text-base-grey"
+                  >andresignacio.dev/blog</span
+                >
+              </div>
+              <div class="w-full md:w-80">
+                <SearchBox />
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtros de categorías -->
+          <div class="flex flex-wrap gap-3 mb-12">
+            <button
+              class="px-4 py-2 rounded-lg border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-base-dark transition-all"
+            >
+              AI
+            </button>
+            <button
+              class="px-4 py-2 rounded-lg border border-neon-yellow text-neon-yellow hover:bg-neon-yellow hover:text-base-dark transition-all"
+            >
+              Liderazgo
+            </button>
+            <button
+              class="px-4 py-2 rounded-lg border border-neon-purple text-neon-purple hover:bg-neon-purple hover:text-base-dark transition-all"
+            >
+              Dev
+            </button>
+            <button
+              class="px-4 py-2 rounded-lg border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-base-dark transition-all"
+            >
+              Música
+            </button>
+            <button
+              class="px-4 py-2 rounded-lg border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-base-dark transition-all"
+            >
+              Casos
+            </button>
+          </div>
+        </div>
+
+        <!-- Artículo destacado -->
+        <NeonBox class="border-t-1 border-b-1">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 p-12">
+            <div class="lg:col-span-2">
+              {
+                featuredPost ? (
+                  <FeaturedArticleCard
+                    title={featuredPost.data.title}
+                    tags={featuredPost.data.tags || []}
+                    color={getColorByCategory(featuredPost.data.category || "")}
+                    description={featuredPost.data.readingTime}
+                    slug={getPostUrl(featuredPost.id)}
+                    category={featuredPost.data.category || ""}
+                  />
+                ) : (
+                  <div class="bg-base-darker border border-neon-cyan rounded-xl p-8 text-center">
+                    <p class="text-base-grey">
+                      No hay artículos destacados disponibles
+                    </p>
+                  </div>
+                )
+              }
+            </div>
+
+            <!-- Columna de artículos laterales -->
+            <div class="space-y-6">
+              {
+                regularPosts.slice(0, 2).map((post) => (
+                  <NeonBox class="border-l-1">
+                    <a href={getPostUrl(post.id)}>
+                      <FeaturedArticleCard
+                        title={post.data.title}
+                        tags={post.data.tags || []}
+                        color={getColorByCategory(post.data.category || "")}
+                        description={post.data.readingTime}
+                        slug={getPostUrl(post.id)}
+                        category={post.data.category || ""}
+                      />
+                    </a>
+                  </NeonBox>
+                ))
+              }
+            </div>
+          </div>
+        </NeonBox>
+
+        <!-- Fila inferior de artículos -->
+        <NeonBox class="border-t-1">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-12">
+            {
+              regularPosts.slice(2, 5).map((post, index) => (
+                <NeonBox class={index < 2 ? "border-r-1" : ""}>
+                  <a href={getPostUrl(post.id)}>
+                    <FeaturedArticleCard
+                      title={post.data.title}
+                      tags={post.data.tags || []}
+                      color={getColorByCategory(post.data.category || "")}
+                      description={post.data.readingTime}
+                      slug={getPostUrl(post.id)}
+                      category={post.data.category || ""}
+                    />
+                  </a>
+                </NeonBox>
+              ))
+            }
+          </div>
+        </NeonBox>
+
+        <!-- Artículos Sugeridos -->
+        <NeonBox class="border-t-1">
+          <div class="p-12">
+            <RelatedArticles
+              currentPost={null}
+              allPosts={allPosts}
+              type="random"
+              maxResults={6}
+              title="Artículos Recomendados"
+            />
+          </div>
+        </NeonBox>
+
+        <!-- Suscripción -->
+        <NeonBox class="border-t-1">
+          <div class="p-12 text-center">
+            <h3 class="text-2xl font-bold mb-4 text-base-light">
+              Suscríbete para recibir los mejores artículos
+            </h3>
+            <p class="text-base-grey mb-6">(1-2/mes)</p>
+            <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="tu@email.com"
+                class="flex-1 px-4 py-3 bg-base-dark border border-neon-purple rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/20 focus:outline-none"
+              />
+              <NeonButton
+                label="Suscribirse"
+                href="#"
+                color="purple"
+                class="w-full sm:w-auto"
+              />
+            </div>
+          </div>
+        </NeonBox>
+      </div>
+    </NeonBox>
+  </Wrapper>
+</BaseLayout>

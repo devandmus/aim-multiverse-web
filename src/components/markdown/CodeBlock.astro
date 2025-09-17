@@ -1,0 +1,131 @@
+---
+export interface Props {
+    code: string;
+    language?: string;
+    title?: string;
+    showLineNumbers?: boolean;
+    highlightLines?: string;
+}
+
+const {
+    code,
+    language = "text",
+    title,
+    showLineNumbers = false,
+    highlightLines,
+} = Astro.props;
+const codeId = `code-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div
+    class="code-block bg-base-darker border border-neon-cyan rounded-xl mb-8 overflow-hidden"
+>
+    {
+        title && (
+            <div class="bg-base-dark border-b border-neon-cyan px-4 py-2">
+                <div class="flex items-center justify-between">
+                    <span class="text-base-light font-semibold">{title}</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-base-grey uppercase tracking-wide">
+                            {language}
+                        </span>
+                        <button
+                            class="copy-btn text-neon-cyan hover:text-neon-pink transition-colors"
+                            onclick={`copyCode('${codeId}')`}
+                            title="Copiar código"
+                        >
+                            <svg
+                                class="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    <div class="relative">
+        <pre
+            class="bg-base-darker p-4 overflow-x-auto"><code id={codeId} class={`language-${language} ${showLineNumbers ? 'line-numbers' : ''}`} data-highlight-lines={highlightLines}>{code}</code></pre>
+    </div>
+</div>
+
+<script>
+    function copyCode(elementId) {
+        const codeElement = document.getElementById(elementId);
+        if (codeElement) {
+            navigator.clipboard.writeText(codeElement.textContent).then(() => {
+                // Mostrar feedback visual
+                const btn = document.querySelector(
+                    `button[onclick="copyCode('${elementId}')"]`,
+                );
+                if (btn) {
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML =
+                        '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
+                    btn.classList.add("text-green-400");
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.classList.remove("text-green-400");
+                    }, 2000);
+                }
+            });
+        }
+    }
+</script>
+
+<style>
+    .code-block pre {
+        margin: 0;
+        font-family: "Fira Code", "Monaco", "Consolas", monospace;
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    .code-block code {
+        color: var(--base-light);
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .code-block .line-numbers {
+        counter-reset: line-numbering;
+    }
+
+    .code-block .line-numbers code {
+        counter-increment: line-numbering;
+    }
+
+    .code-block .line-numbers code::before {
+        content: counter(line-numbering);
+        display: inline-block;
+        width: 2em;
+        text-align: right;
+        margin-right: 1em;
+        color: var(--base-grey);
+        user-select: none;
+    }
+
+    .copy-btn {
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+        background-color: var(--base-dark);
+    }
+</style>

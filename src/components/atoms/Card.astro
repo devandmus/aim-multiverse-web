@@ -1,0 +1,29 @@
+---
+import NeonBox from "./NeonBox.astro";
+import NeonButton from "./NeonButton.astro";
+
+interface Button {
+    label: string;
+    href: string;
+    color: string;
+}
+
+interface Props {
+    image: string;
+    title: string;
+    description: string;
+    buttons: Button[];
+}
+
+const { image, title, description } = Astro.props;
+---
+<NeonBox class=" border-b-1 border-r-1 rounded-br-lg rounded-tr-lg ">
+    <figure class="font-0">
+      <img src={image} alt={title} class="font-0 rounded-tr-lg rounded-tl-lg"/>
+    </figure>
+    <div class="px-4 py-6">
+      <NeonButton label="@devandmus - RRSS" href="/music" color="cyan" class="mb-4" />
+      <NeonButton label="Guitar Licks - TikTok" href="/music" color="pink" class="mb-4" />
+      <NeonButton label="One Lick a Day - YouTube" href="/music" color="purple" />
+    </div>
+</NeonBox>

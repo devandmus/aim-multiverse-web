@@ -1,3 +1,4 @@
+@import "./transitions-box.css";
 @import "tailwindcss";
 
 /* Variables CSS para colores y gradientes */
@@ -6,16 +7,17 @@
   --base-dark: #0D0D0F;
   --base-light: #F5F5F5;
   --base-grey: #9CA3AF;
-  
+
   /* Colores neón */
   --neon-yellow: #F8F32B;
   --neon-cyan: #00FFF7;
   --neon-pink: #FF00A0;
   --neon-purple: #A020F0;
-  
+
   /* Gradientes */
   --multiverse-bg: linear-gradient(90deg, transparent 0%, rgba(168, 85, 247, 0.1) 20%, transparent 40%), linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.1) 30%, transparent 60%), linear-gradient(45deg, transparent 0%, rgba(236, 72, 153, 0.05) 50%, transparent 70%);
   --multiverse-overlay: linear-gradient(135deg, rgba(168, 85, 247, 0.03) 0%, transparent 25%), linear-gradient(225deg, rgba(59, 130, 246, 0.03) 0%, transparent 25%), linear-gradient(315deg, rgba(236, 72, 153, 0.02) 0%, transparent 25%);
+
 }
 
 /* Clases personalizadas para colores neón */
@@ -91,25 +93,3 @@
 .text-base-grey {
   color: var(--base-grey);
 }
-
-/* Fondo global usando clases de Tailwind */
-html, body {
-  @apply min-h-full;
-}
-
-body {
-  @apply bg-fixed;
-  background-color: black;
-}
-/* 
-body::before {
-  content: '';
-  @apply fixed inset-0 pointer-events-none -z-10;
-  background: var(--multiverse-bg);
-}
-
-body::after {
-  content: '';
-  @apply fixed inset-0 pointer-events-none -z-10;
-  background: var(--multiverse-overlay);
-} */

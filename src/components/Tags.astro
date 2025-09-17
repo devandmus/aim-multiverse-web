@@ -1,0 +1,57 @@
+---
+import { getTagsWithColors } from "../lib/blog";
+
+export interface Props {
+    tags: string[];
+    category: string;
+    size?: "small" | "medium" | "large";
+    className?: string;
+    style?: string;
+}
+
+const {
+    tags,
+    category,
+    size = "medium",
+    className = "",
+    style = "",
+} = Astro.props;
+
+const tagsWithColors = getTagsWithColors(tags, category);
+
+const sizeClasses = {
+    small: {
+        padding: "px-2 py-1",
+        text: "text-xs",
+    },
+    medium: {
+        padding: "px-3 py-1",
+        text: "text-sm",
+    },
+    large: {
+        padding: "px-4 py-2",
+        text: "text-base",
+    },
+};
+
+const colorClasses = {
+    pink: "bg-neon-pink text-base-dark",
+    yellow: "bg-neon-yellow text-base-dark",
+    cyan: "bg-neon-cyan text-base-dark",
+    purple: "bg-neon-purple text-base-dark",
+};
+
+const currentSize = sizeClasses[size];
+---
+
+<div class={`flex flex-wrap gap-2 ${className}`} style={style}>
+    {
+        tagsWithColors.map(({ tag, color }) => (
+            <span
+                class={`${currentSize.padding} ${currentSize.text} font-semibold rounded-full ${colorClasses[color]}`}
+            >
+                {tag}
+            </span>
+        ))
+    }
+</div>
