@@ -1,0 +1,31 @@
+---
+import NeonBox from "./atoms/NeonBox.astro";
+import ArticleCard from "./cards/ArticleCard.astro";
+import { getColorByCategory, getPostUrl } from "../lib/blog";
+
+export interface Props {
+    posts: any[];
+    class?: string;
+}
+
+const { posts, class: className = "" } = Astro.props;
+---
+
+<NeonBox class={`border-t-1 ${className}`} color="purple">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-12">
+        {
+            posts.map((post, index) => (
+                <ArticleCard
+                    title={post.data.title}
+                    tags={post.data.tags || []}
+                    color={getColorByCategory(post.data.category || "")}
+                    description={post.data.readingTime}
+                    slug={getPostUrl(post.id)}
+                    category={post.data.category || ""}
+                    id={post.id}
+                    noBorderRight={index < 2}
+                />
+            ))
+        }
+    </div>
+</NeonBox>

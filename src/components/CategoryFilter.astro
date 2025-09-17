@@ -1,0 +1,64 @@
+---
+export interface Props {
+    categories: Array<{
+        name: string;
+        color: "pink" | "yellow" | "cyan" | "purple";
+    }>;
+    selectedCategory?: string;
+    onCategoryChange?: string; // JavaScript function name
+}
+
+const { categories, selectedCategory = "", onCategoryChange } = Astro.props;
+
+const colorClasses = {
+    pink: {
+        border: "border-neon-pink",
+        text: "text-neon-pink",
+        hover: "hover:bg-neon-pink hover:text-base-dark",
+    },
+    yellow: {
+        border: "border-neon-yellow",
+        text: "text-neon-yellow",
+        hover: "hover:bg-neon-yellow hover:text-base-dark",
+    },
+    cyan: {
+        border: "border-neon-cyan",
+        text: "text-neon-cyan",
+        hover: "hover:bg-neon-cyan hover:text-base-dark",
+    },
+    purple: {
+        border: "border-neon-purple",
+        text: "text-neon-purple",
+        hover: "hover:bg-neon-purple hover:text-base-dark",
+    },
+};
+---
+
+<div class="flex flex-wrap gap-3">
+    {
+        categories.map((category) => {
+            const colorClass = colorClasses[category.color];
+            const isSelected = selectedCategory === category.name;
+
+            return (
+                <button
+                    class={`px-4 py-2 rounded-lg border transition-all ${
+                        colorClass.border
+                    } ${colorClass.text} ${colorClass.hover} ${
+                        isSelected
+                            ? `${colorClass.hover.split(" ")[0]} ${colorClass.hover.split(" ")[1]}`
+                            : ""
+                    }`}
+                    data-category={category.name}
+                    onclick={
+                        onCategoryChange
+                            ? `${onCategoryChange}('${category.name}')`
+                            : ""
+                    }
+                >
+                    {category.name}
+                </button>
+            );
+        })
+    }
+</div>

@@ -1,0 +1,61 @@
+---
+import NeonBox from "./atoms/NeonBox.astro";
+import ArticleCard from "./cards/ArticleCard.astro";
+import { getColorByCategory, getPostUrl } from "../lib/blog";
+
+export interface Props {
+    featuredPost: any;
+    regularPosts: any[];
+    class?: string;
+}
+
+const { featuredPost, regularPosts, class: className = "" } = Astro.props;
+---
+
+<NeonBox class={`border-t-1 border-b-1 ${className}`} color="cyan">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 p-12">
+        <div class="lg:col-span-2">
+            {
+                featuredPost ? (
+                    <ArticleCard
+                        title={featuredPost.data.title}
+                        tags={featuredPost.data.tags || []}
+                        color={getColorByCategory(
+                            featuredPost.data.category || "",
+                        )}
+                        description={featuredPost.data.readingTime}
+                        slug={getPostUrl(featuredPost.id)}
+                        category={featuredPost.data.category || ""}
+                        id={featuredPost.id}
+                    />
+                ) : (
+                    <div class="bg-base-darker border border-neon-cyan rounded-xl p-8 text-center">
+                        <p class="text-base-grey">
+                            No hay artículos destacados disponibles
+                        </p>
+                    </div>
+                )
+            }
+        </div>
+
+        <!-- Columna de artículos laterales -->
+        <div class="space-y-6">
+            {
+                regularPosts
+                    .slice(0, 2)
+                    .map((post) => (
+                        <ArticleCard
+                            title={post.data.title}
+                            tags={post.data.tags || []}
+                            color={getColorByCategory(post.data.category || "")}
+                            description={post.data.readingTime}
+                            slug={getPostUrl(post.id)}
+                            category={post.data.category || ""}
+                            id={post.id}
+                            noBorderLeft={true}
+                        />
+                    ))
+            }
+        </div>
+    </div>
+</NeonBox>

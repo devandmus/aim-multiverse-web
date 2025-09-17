@@ -5,8 +5,10 @@ interface Props {
   noBorderRight?: boolean;
   noBorderTop?: boolean;
   noBorderBottom?: boolean;
-  borderWidth?: string;
+  boxClass?: string;
+  contentClass?: string;
   transitionName?: string;
+  color?: "pink" | "yellow" | "cyan" | "purple";
 }
 
 const {
@@ -15,24 +17,37 @@ const {
   noBorderRight = false,
   noBorderTop = false,
   noBorderBottom = false,
+  contentClass = "",
   transitionName = "",
+  color,
 } = Astro.props;
+
+// Función para obtener el valor CSS del color neon
+const getNeonColor = (color: "pink" | "yellow" | "cyan" | "purple") => {
+  const colorMap = {
+    pink: "#ff00a0",
+    yellow: "#f8f32b",
+    cyan: "#00fff7",
+    purple: "#a020f0",
+  };
+  return colorMap[color];
+};
 
 const suppressClasses = [];
 if (noBorderLeft) suppressClasses.push("no-border-left");
 if (noBorderRight) suppressClasses.push("no-border-right");
 if (noBorderTop) suppressClasses.push("no-border-top");
 if (noBorderBottom) suppressClasses.push("no-border-bottom");
-const borderClass = `${suppressClasses.join(" ")} ${className}`;
+const borderClass = `${suppressClasses.join(" ")}`;
 ---
 
-<div class={`neon-wrapper ${className}`}>
+<div class={`neon-wrapper ${className} ${className}`}>
   <div
-    class={`neon-box ${borderClass} ${className}`}
-    style={transitionName && `view-transition-name: ${transitionName}`}
+    class={`neon-box ${borderClass} ${className} ${color ? "static-color" : ""}`}
+    style={`${color ? `--neon-color: ${getNeonColor(color)};` : ""} ${transitionName ? `view-transition-name: ${transitionName}` : ""}`}
   >
   </div>
-  <div class={`neon-content ${borderClass}`}>
+  <div class={`neon-content ${borderClass} ${contentClass}`}>
     <slot />
   </div>
 </div>
@@ -55,7 +70,7 @@ const borderClass = `${suppressClasses.join(" ")} ${className}`;
     /* Todos los bordes activos por defecto */
     border: 1px solid transparent;
 
-    /* Borde neon */
+    /* Borde neon animado (por defecto) */
     background-image: linear-gradient(#000000, #000000),
       linear-gradient(135deg, #ff00a0, #00fff7, #a020f0, #f8f32b);
     background-origin: border-box;
@@ -64,6 +79,14 @@ const borderClass = `${suppressClasses.join(" ")} ${className}`;
     /* Animación del gradiente */
     animation: neon-move 6s linear infinite;
     background-size: 300% 300%;
+  }
+
+  /* Estilo para color estático */
+  .neon-box.static-color {
+    background-image: linear-gradient(#000000, #000000),
+      linear-gradient(135deg, var(--neon-color), var(--neon-color));
+    animation: none;
+    background-size: auto;
   }
 
   /* Suprimir bordes específicos */
