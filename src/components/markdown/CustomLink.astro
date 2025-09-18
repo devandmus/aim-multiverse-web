@@ -1,0 +1,32 @@
+---
+export interface Props {
+    href: string;
+    class?: string;
+}
+
+const { href, class: className = "" } = Astro.props;
+---
+
+<a
+    href={href}
+    class={`text-neon-cyan no-underline border-b border-transparent transition-all duration-300 font-medium relative hover:text-neon-yellow hover:shadow-[0_0_12px_rgba(0,255,247,0.4)] hover:-translate-y-0.5 ${className}`}
+>
+    <slot />
+</a>
+
+<style>
+    a::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+        transition: width 0.4s ease;
+    }
+
+    a:hover::before {
+        width: 100%;
+    }
+</style>

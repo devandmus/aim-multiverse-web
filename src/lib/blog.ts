@@ -9,11 +9,11 @@ import type { CollectionEntry } from "astro:content";
 export async function getAllPosts(includeDrafts: boolean = false): Promise<CollectionEntry<'blog'>[]> {
     const allPosts = await getCollection('blog');
 
-    if (includeDrafts) {
-        return allPosts;
-    }
+    // Filtrar borradores si es necesario
+    const filteredPosts = includeDrafts ? allPosts : allPosts.filter(post => !post.data.draft);
 
-    return allPosts.filter(post => !post.data.draft);
+    // Ordenar por fecha (más recientes primero)
+    return filteredPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
 /**

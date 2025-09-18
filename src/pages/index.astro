@@ -126,6 +126,7 @@ const latestPost = await getLatestPost();
                   <ArticleCard
                     title={latestPost.data.title}
                     id={latestPost.slug}
+                    titleSize="text-2xl md:text-3xl"
                     tags={latestPost.data.tags || []}
                     color={getColorByCategory(latestPost.data.category || "")}
                     description={

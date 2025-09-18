@@ -4,28 +4,18 @@ import NeonBox from "../components/atoms/NeonBox.astro";
 import Wrapper from "../components/skeleton/Wrapper.astro";
 import SearchBox from "../components/SearchBox.astro";
 import CategoryFilter from "../components/CategoryFilter.astro";
-import FeaturedSection from "../components/FeaturedSection.astro";
 import ArticlesGrid from "../components/ArticlesGrid.astro";
 import SubscriptionSection from "../components/SubscriptionSection.astro";
-import {
-  getAllPosts,
-  getFeaturedPosts,
-  getRandomSuggestions,
-  getColorByCategory,
-  getPostUrl,
-} from "../lib/blog";
+import { getAllPosts } from "../lib/blog";
 
 // Obtener artículos para mostrar en el blog
 const allPosts = await getAllPosts();
 const publishedPosts = allPosts;
 
-// Obtener artículo destacado
-const featuredPosts = await getFeaturedPosts();
-const featuredPost = featuredPosts[0]; // Tomar el primero si hay múltiples
-const regularPosts = publishedPosts.filter((post) => !post.data.featured);
-
-// Obtener artículos para sugerencias aleatorias
-const randomSuggestions = getRandomSuggestions(allPosts, undefined, 6);
+// Verificar si el usuario viene desde la página de inicio
+const referrer = Astro.request.headers.get("referer") || "";
+const isFromIndex = referrer.includes("/") && !referrer.includes("/blog");
+const shouldFadeIn = isFromIndex;
 
 // Configuración de categorías para el filtro
 const categories = [
@@ -43,7 +33,7 @@ const categories = [
 >
   <Wrapper>
     <NeonBox class="max-w-6xl mx-auto" transitionName="blog-page">
-      <div class="fade-in">
+      <div class={shouldFadeIn ? "fade-in" : ""}>
         <!-- Header del Blog -->
         <div class="p-12">
           <div
@@ -76,14 +66,8 @@ const categories = [
           </div>
         </div>
 
-        <!-- Artículo destacado -->
-        <FeaturedSection
-          featuredPost={featuredPost}
-          regularPosts={regularPosts}
-        />
-
-        <!-- Fila inferior de artículos -->
-        <ArticlesGrid posts={regularPosts.slice(2, 5)} />
+        <!-- Grid de artículos con el primero como destacado -->
+        <ArticlesGrid posts={publishedPosts.slice(0, 6)} gridColor="cyan" />
 
         <!-- Suscripción -->
         <SubscriptionSection />

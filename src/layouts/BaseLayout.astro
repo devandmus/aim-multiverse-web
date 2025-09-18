@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import RetroFuturisticMenu from "../components/RetroFuturisticMenu.astro";
 
 export interface Props {
   title: string;
@@ -22,6 +23,7 @@ const {
     <title>{title}</title>
   </head>
   <body class="min-h-full bg-black text-white font-sans">
+    <RetroFuturisticMenu />
     <slot />
   </body>
 </html>

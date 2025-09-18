@@ -1,240 +1,258 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ArticleNavigation from "../components/ArticleNavigation.astro";
+import SubscriptionSection from "../components/SubscriptionSection.astro";
 import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import RelatedArticles from "../components/RelatedArticles.astro";
-import { ResourceDownload } from "../components/markdown";
-import Tags from "../components/Tags.astro";
-import NeonBox from "../components/atoms/NeonBox.astro";
 
 export interface Props {
-    frontmatter: CollectionEntry<"blog">["data"];
+    frontmatter: any;
     url: string;
-    currentPost?: CollectionEntry<"blog">;
+    currentPost: any;
 }
 
 const { frontmatter, url, currentPost } = Astro.props;
-const slug = currentPost?.slug;
 
-// Obtener todos los posts para artículos relacionados
+// Función para formatear fecha de manera segura
+function formatDate(date: any): string {
+    if (!date) return "Fecha no disponible";
+
+    try {
+        const dateObj = new Date(date);
+        if (isNaN(dateObj.getTime())) {
+            return "Fecha no disponible";
+        }
+        return format(dateObj, "dd MMMM yyyy", { locale: es });
+    } catch (error) {
+        return "Fecha no disponible";
+    }
+}
+
+// Obtener todos los posts para RelatedArticles
 const allPosts = await getCollection("blog");
-
-// Generar JSON-LD para SEO
-const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: frontmatter.title,
-    description: frontmatter.description,
-    author: {
-        "@type": "Person",
-        name: frontmatter.author,
-    },
-    datePublished: frontmatter.date.toISOString(),
-    dateModified:
-        frontmatter.updatedDate?.toISOString() ||
-        frontmatter.date.toISOString(),
-    url: url,
-    keywords: frontmatter.tags?.join(", "),
-    articleSection: frontmatter.category,
-    wordCount: frontmatter.readingTime,
-};
 ---
 
-<BaseLayout
-    title={frontmatter.seo?.title || frontmatter.title}
-    description={frontmatter.seo?.description || frontmatter.description}
->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-
-    <article
-        class="min-h-screen bg-base-dark text-base-light"
-        style={`view-transition-name: article-card-${slug}`}
-    >
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+    <main class="min-h-screen bg-black">
         <!-- Hero Section -->
-        <section class="relative py-20 px-4">
-            <div class="max-w-6xl mx-auto">
-                <NeonBox class="p-12">
-                    <div class="mb-8">
-                        <Tags
-                            tags={frontmatter.tags || []}
-                            category={frontmatter.category || ""}
-                            size="large"
-                            style={`view-transition-name: article-tags-${slug}`}
-                        />
-                    </div>
-
+        <section class="relative py-20">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center">
                     <h1
-                        class="text-4xl md:text-6xl font-bold mb-6 leading-tight"
-                        style={`view-transition-name: article-title-${slug}`}
+                        class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
+                        style={`view-transition-name: article-title-${currentPost.slug}`}
                     >
                         {frontmatter.title}
                     </h1>
 
-                    <p class="text-xl text-base-grey mb-8">
-                        {frontmatter.description}
-                    </p>
-
-                    <div
-                        class="flex flex-wrap items-center gap-4 text-base-grey"
-                    >
-                        <div class="flex items-center gap-2">
-                            <svg
-                                class="w-5 h-5"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
+                    <div class="max-w-3xl mx-auto">
+                        <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                            {frontmatter.description}
+                        </p>
+                        <!-- Autor Section -->
+                        <div
+                            class="flex items-center justify-center gap-4 mb-8"
+                        >
+                            <div
+                                class="w-12 h-12 rounded-full overflow-hidden border-2 border-neon-cyan"
                             >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            <span>{frontmatter.author}</span>
+                                <img
+                                    src="/images/andres-cuadrado.jpg"
+                                    alt="Andrés Maldonado"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div class="text-left">
+                                <div class="text-white font-semibold text-lg">
+                                    Andrés Maldonado
+                                </div>
+                                <div class="text-gray-400 text-sm">
+                                    Desarrollador Full Stack
+                                </div>
+                            </div>
                         </div>
+                        <!-- Metadatos -->
+                        <div
+                            class="flex flex-wrap items-center gap-4 justify-center"
+                        >
+                            <div class="flex items-center gap-2">
+                                <svg
+                                    class="w-4 h-4 text-neon-cyan"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">
+                                    {formatDate(frontmatter.pubDate)}
+                                </span>
+                            </div>
 
-                        <div class="flex items-center gap-2">
-                            <svg
-                                class="w-5 h-5"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            <span
-                                >{
-                                    format(frontmatter.date, "dd MMMM yyyy", {
-                                        locale: es,
-                                    })
-                                }</span
-                            >
+                            {
+                                frontmatter.readingTime && (
+                                    <div class="flex items-center gap-2">
+                                        <svg
+                                            class="w-4 h-4 text-neon-pink"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        <span class="text-sm">
+                                            {frontmatter.readingTime}
+                                        </span>
+                                    </div>
+                                )
+                            }
+
+                            {
+                                frontmatter.category && (
+                                    <div class="flex items-center gap-2">
+                                        <svg
+                                            class="w-4 h-4 text-neon-yellow"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10a1 1 0 01.293-.707l7-7a1 1 0 011.414 0l7 7zM5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        <span class="text-sm">
+                                            {frontmatter.category}
+                                        </span>
+                                    </div>
+                                )
+                            }
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                        {
-                            frontmatter.readingTime && (
-                                <div class="flex items-center gap-2">
+        <!-- Content -->
+        <div class="max-w-3xl mx-auto">
+            <div class="blog-content-wrapper">
+                <slot />
+            </div>
+        </div>
+
+        <!-- Recursos del artículo -->
+        {
+            frontmatter.resources &&
+                Array.isArray(frontmatter.resources) &&
+                frontmatter.resources.length > 0 && (
+                    <div class="mt-12">
+                        <div class="max-w-6xl mx-auto px-6">
+                            <div class="bg-gradient-to-r from-neon-cyan/10 to-neon-pink/10 rounded-2xl p-8 border border-neon-cyan/20">
+                                <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                                     <svg
-                                        class="w-5 h-5"
+                                        class="w-6 h-6 text-neon-cyan"
                                         fill="currentColor"
                                         viewBox="0 0 20 20"
                                     >
                                         <path
                                             fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
                                             clip-rule="evenodd"
                                         />
                                     </svg>
-                                    <span>{frontmatter.readingTime}</span>
+                                    Recursos del Artículo
+                                </h3>
+                                <div class="grid gap-4">
+                                    {frontmatter.resources.map(
+                                        (resource: any) => (
+                                            <a
+                                                href={resource.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="flex items-center gap-3 p-4 bg-black/50 rounded-lg border border-neon-cyan/20 hover:border-neon-cyan/40 transition-all duration-300 hover:bg-black/70"
+                                            >
+                                                <svg
+                                                    class="w-5 h-5 text-neon-cyan flex-shrink-0"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                                <div>
+                                                    <div class="text-white font-medium">
+                                                        {resource.name}
+                                                    </div>
+                                                    <div class="text-gray-400 text-sm">
+                                                        {resource.description}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        ),
+                                    )}
                                 </div>
-                            )
-                        }
-                    </div>
-                </NeonBox>
-            </div>
-
-            <!-- Content -->
-            <div class="prose prose-lg prose-invert max-w-none">
-                <slot />
-            </div>
-
-            <!-- Recursos del artículo -->
-            {
-                frontmatter.resources && (
-                    <div class="mt-12">
-                        <ResourceDownload
-                            resources={frontmatter.resources}
-                            articleSlug={currentPost?.id || ""}
-                        />
+                            </div>
+                        </div>
                     </div>
                 )
-            }
-        </section>
-    </article>
-</BaseLayout>
+        }
 
-<!-- Related Articles -->
-{
-    currentPost && (
-        <section class="px-4 pb-20">
-            <div class="max-w-6xl mx-auto">
-                <RelatedArticles
-                    currentPost={currentPost}
-                    allPosts={allPosts}
-                    type="related"
-                    maxResults={3}
-                />
+        <!-- Navegación de artículos -->
+        <ArticleNavigation currentPost={currentPost} allPosts={allPosts} />
+
+        <!-- Sección de suscripción -->
+        <section
+            class="py-20 bg-gradient-to-br from-neon-cyan/5 to-neon-pink/5"
+        >
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <div
+                    class="bg-black/80 backdrop-blur-sm rounded-2xl p-12 border border-neon-cyan/20 shadow-2xl"
+                >
+                    <div class="mb-8">
+                        <h2 class="text-4xl font-bold text-white mb-4">
+                            ¿Te gustó este artículo?
+                        </h2>
+                        <p class="text-xl text-gray-300 leading-relaxed">
+                            Suscríbete a mi newsletter y recibe contenido
+                            exclusivo sobre desarrollo web, JavaScript y las
+                            últimas tendencias en tecnología.
+                        </p>
+                    </div>
+
+                    <div
+                        class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+                    >
+                        <input
+                            type="email"
+                            placeholder="Tu email aquí"
+                            class="flex-1 px-6 py-4 bg-black/50 border border-neon-cyan/30 rounded-lg text-white placeholder-gray-400 focus:border-neon-cyan focus:outline-none focus:ring-2 focus:ring-neon-cyan/20 transition-all"
+                        />
+                        <button
+                            class="px-8 py-4 bg-gradient-to-r from-neon-cyan to-neon-pink text-black font-bold rounded-lg hover:scale-105 transition-transform shadow-lg hover:shadow-neon-cyan/25"
+                        >
+                            Suscribirse
+                        </button>
+                    </div>
+
+                    <p class="text-sm text-gray-400 mt-6">
+                        Sin spam. Cancela cuando quieras. Respetamos tu
+                        privacidad.
+                    </p>
+                </div>
             </div>
         </section>
-    )
-}
+    </main>
 
-<style>
-    /* Estilos para el contenido markdown */
-    .prose {
-        --tw-prose-body: var(--base-light);
-        --tw-prose-headings: var(--base-light);
-        --tw-prose-lead: var(--base-grey);
-        --tw-prose-links: var(--neon-cyan);
-        --tw-prose-bold: var(--base-light);
-        --tw-prose-counters: var(--base-grey);
-        --tw-prose-bullets: var(--neon-cyan);
-        --tw-prose-hr: var(--neon-cyan);
-        --tw-prose-quotes: var(--base-light);
-        --tw-prose-quote-borders: var(--neon-cyan);
-        --tw-prose-captions: var(--base-grey);
-        --tw-prose-code: var(--neon-pink);
-        --tw-prose-pre-code: var(--base-light);
-        --tw-prose-pre-bg: var(--base-dark);
-        --tw-prose-th-borders: var(--neon-cyan);
-        --tw-prose-td-borders: var(--base-grey);
-    }
-
-    .prose h1,
-    .prose h2,
-    .prose h3,
-    .prose h4,
-    .prose h5,
-    .prose h6 {
-        color: var(--base-light);
-        font-weight: 700;
-    }
-
-    .prose h2 {
-        border-bottom: 2px solid var(--neon-cyan);
-        padding-bottom: 0.5rem;
-    }
-
-    .prose code {
-        background-color: var(--base-dark);
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.375rem;
-        font-size: 0.875em;
-    }
-
-    .prose pre {
-        background-color: var(--base-dark);
-        border: 1px solid var(--neon-cyan);
-        border-radius: 0.5rem;
-    }
-
-    .prose blockquote {
-        border-left: 4px solid var(--neon-cyan);
-        background-color: var(--base-dark);
-        padding: 1rem;
-        border-radius: 0.5rem;
-    }
-
-    .prose a {
-        color: var(--neon-cyan);
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.3s ease;
-    }
-
-    .prose a:hover {
-        border-bottom-color: var(--neon-cyan);
-    }
-</style>
+    <Footer />
+</BaseLayout>

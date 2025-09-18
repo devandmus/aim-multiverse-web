@@ -47,7 +47,7 @@ const borderClass = `${suppressClasses.join(" ")}`;
     style={`${color ? `--neon-color: ${getNeonColor(color)};` : ""} ${transitionName ? `view-transition-name: ${transitionName}` : ""}`}
   >
   </div>
-  <div class={`neon-content ${borderClass} ${contentClass}`}>
+  <div class={`neon-content h-full ${borderClass} ${contentClass}`}>
     <slot />
   </div>
 </div>

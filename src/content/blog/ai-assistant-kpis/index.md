@@ -23,11 +23,6 @@ resources:
     - "assistant-basic.py"
     - "metrics-dashboard.js"
 ---
-
-# Cómo construir un asistente de IA que realmente mueva KPIs
-
-En el mundo empresarial actual, no basta con tener tecnología avanzada. Lo que realmente importa es **impacto medible**. Te muestro cómo construir un asistente de IA que mueva agujas reales en tu negocio.
-
 ## El problema: IA sin impacto
 
 ### Lo que vemos en la mayoría de empresas:
