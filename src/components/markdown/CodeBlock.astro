@@ -14,7 +14,9 @@ const {
     showLineNumbers = false,
     highlightLines,
 } = Astro.props;
-const codeId = `code-${Math.random().toString(36).substr(2, 9)}`;
+
+// Generar un ID único más estable
+const codeId = `code-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
 ---
 
 <div

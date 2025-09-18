@@ -9,11 +9,6 @@ import { getAllPosts } from "../lib/blog";
 // Obtener artículos para mostrar en el blog
 const allPosts = await getAllPosts();
 const publishedPosts = allPosts;
-
-// Verificar si el usuario viene desde la página de inicio
-const referrer = Astro.request.headers.get("referer") || "";
-const isFromIndex = referrer.includes("/") && !referrer.includes("/blog");
-const shouldFadeIn = isFromIndex;
 ---
 
 <BaseLayout
@@ -22,7 +17,7 @@ const shouldFadeIn = isFromIndex;
 >
   <Wrapper>
     <NeonBox class="max-w-6xl mx-auto" transitionName="blog-page">
-      <div class={shouldFadeIn ? "fade-in" : ""}>
+      <div>
         <!-- Header del Blog -->
         <div class="p-12">
           <div class="text-center mb-12">

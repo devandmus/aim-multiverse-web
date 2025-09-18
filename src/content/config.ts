@@ -30,6 +30,15 @@ const blog = defineCollection({
     }),
 });
 
+const config = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+    }),
+});
+
 export const collections = {
     blog,
+    config,
 };
