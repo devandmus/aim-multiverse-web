@@ -8,7 +8,6 @@ export {
     getFeaturedPosts,
     getColorByCategory,
     getBlogStats,
-    searchPosts,
     getRandomSuggestions,
     getPostUrl,
     getTagColor,

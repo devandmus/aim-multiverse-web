@@ -191,28 +191,6 @@ export async function getBlogStats(includeDrafts: boolean = false): Promise<{
     };
 }
 
-/**
- * Busca posts por término en título y descripción
- * @param searchTerm - Término de búsqueda
- * @param includeDrafts - Si incluir posts en borrador (default: false)
- * @returns Array de posts que coinciden con la búsqueda
- */
-export async function searchPosts(
-    searchTerm: string,
-    includeDrafts: boolean = false
-): Promise<CollectionEntry<'blog'>[]> {
-    const posts = await getAllPosts(includeDrafts);
-    const term = searchTerm.toLowerCase();
-
-    return posts.filter(post =>
-        post.data.title.toLowerCase().includes(term) ||
-        post.data.description.toLowerCase().includes(term) ||
-        (post.data.tags && post.data.tags.some(tag =>
-            tag.toLowerCase().includes(term)
-        )) ||
-        (post.data.category && post.data.category.toLowerCase().includes(term))
-    );
-}
 
 /**
  * Obtiene sugerencias aleatorias de posts
