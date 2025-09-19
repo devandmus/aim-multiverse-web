@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import NeonBox from "../components/atoms/NeonBox.astro";
 import Wrapper from "../components/skeleton/Wrapper.astro";
 import ArticlesGrid from "../components/ArticlesGrid.astro";
-import SubscriptionSection from "../components/SubscriptionSection.astro";
+import SubscriptionBox from "../components/SubscriptionBox.astro";
 import { getAllPosts } from "../lib/blog";
 
 // Obtener artículos para mostrar en el blog
@@ -39,7 +39,7 @@ const publishedPosts = allPosts;
         <ArticlesGrid posts={publishedPosts.slice(0, 6)} gridColor="cyan" />
 
         <!-- Suscripción -->
-        <SubscriptionSection />
+        <SubscriptionBox color="cyan" />
       </div>
     </NeonBox>
   </Wrapper>

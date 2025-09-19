@@ -7,6 +7,9 @@ import NeonButton from "../components/atoms/NeonButton.astro";
 import Wrapper from "../components/skeleton/Wrapper.astro";
 import ArticleCard from "../components/cards/ArticleCard.astro";
 import { getLatestPost, getColorByCategory, getPostUrl } from "../lib/blog";
+import { Image } from "astro:assets";
+import andresMacbook from "../assets/images/andres-macbook.jpg";
+import andresGuitarra from "../assets/images/andres-guitarra.jpeg";
 
 // Obtener el artículo más reciente del blog
 const latestPost = await getLatestPost();
@@ -48,10 +51,14 @@ const latestPost = await getLatestPost();
               </h2>
               <Gradients ltrbtu={false} />
               <figure>
-                <img
-                  src="/images/andres-macbook.jpg"
+                <Image
+                  src={andresMacbook}
                   alt="Andrés Ignacio Maldonado"
+                  width={800}
+                  height={800}
                   class="rounded-lg"
+                  loading="lazy"
+                  decoding="async"
                 />
               </figure>
             </div>
@@ -72,10 +79,14 @@ const latestPost = await getLatestPost();
                   noBorderLeft={true}
                 >
                   <figure class="font-0">
-                    <img
-                      src="/images/andres-guitarra.jpeg"
+                    <Image
+                      src={andresGuitarra}
                       alt="Andrés Ignacio Maldonado"
+                      width={1200}
+                      height={800}
                       class="font-0 rounded-tr-lg rounded-tl-lg"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </figure>
                   <div class="px-4 py-6">
@@ -110,6 +121,7 @@ const latestPost = await getLatestPost();
                 >
                   <a
                     href="/blog"
+                    data-astro-prefetch
                     class="relative blog-button text-neon-cyan font-bold"
                   >
                     <div
