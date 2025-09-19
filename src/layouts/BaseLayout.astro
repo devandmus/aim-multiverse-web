@@ -5,12 +5,19 @@ import RetroFuturisticMenu from "../components/RetroFuturisticMenu.astro";
 export interface Props {
   title: string;
   description?: string;
+  posts?: any[];
 }
 
 const {
   title,
   description = "Andrés Ignacio Maldonado - Tech Lead • AI • Música",
+  posts = [],
 } = Astro.props;
+
+// Generar prefetch links para los posts
+const prefetchLinks = posts.map((post) => ({
+  href: `/blog/${post.slug}`,
+}));
 ---
 
 <!doctype html>
@@ -20,7 +27,9 @@ const {
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
     <title>{title}</title>
+    {prefetchLinks.map((link) => <link rel="prefetch" href={link.href} />)}
   </head>
   <body class="min-h-full bg-black text-white font-sans">
     <RetroFuturisticMenu />
