@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import {
     getRandomSuggestions,
     getRelatedArticles,
-} from "../utils/getRelatedArticles";
+} from "../lib/getRelatedArticles";
 
 export interface Props {
     currentPost: CollectionEntry<"blog"> | null;
