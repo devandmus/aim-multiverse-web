@@ -3,221 +3,219 @@ import NeonBox from "./atoms/NeonBox.astro";
 import NeonButton from "./atoms/NeonButton.astro";
 
 export interface Props {
-    class?: string;
-    title?: string;
-    subtitle?: string;
-    color?: "pink" | "yellow" | "cyan" | "purple";
+  title?: string;
+  subtitle?: string;
+  color?: "pink" | "yellow" | "cyan" | "purple";
 }
 
 const {
-    class: className = "",
-    title = "Suscríbete para recibir los mejores artículos",
-    subtitle = "(1-2/mes)",
-    color = "pink",
+  title = "Suscríbete para recibir los mejores artículos",
+  subtitle = "(1-2/mes)",
+  color = "pink",
 } = Astro.props;
 ---
 
-<NeonBox class={`border-t-1 ${className}`} color={color}>
-    <div class="p-12 text-center">
-        <h3 class="text-2xl font-bold mb-4 text-base-light">
-            {title}
-        </h3>
-        <p class="text-base-grey mb-6">{subtitle}</p>
+<div>
+  <div class="p-6 sm:p-12 text-center">
+    <h3 class="text-xl sm:text-2xl font-bold mb-4 text-base-light">
+      {title}
+    </h3>
+    <p class="text-base-grey mb-6">{subtitle}</p>
 
-        <form id="subscription-form" class="max-w-md mx-auto">
-            <!-- Email field - always visible -->
-            <div class="mb-4">
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="tu@email.com"
-                    required
-                    class="w-full px-4 py-3 bg-base-dark border border-neon-purple rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/20 focus:outline-none"
-                />
-            </div>
+    <form id="subscription-form" class="max-w-md mx-auto w-full px-4 sm:px-0">
+      <!-- Email field - always visible -->
+      <div class="mb-4">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="tu@email.com"
+          required
+          class="w-full px-4 py-3 bg-base-dark border border-neon-purple rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none"
+        />
+      </div>
 
-            <!-- Optional fields - hidden by default -->
-            <div id="optional-fields" class="hidden space-y-4 mb-4">
-                <p class="text-sm text-base-grey text-left">
-                    Campos opcionales:
-                </p>
+      <!-- Optional fields - hidden by default -->
+      <div id="optional-fields" class="hidden space-y-4 mb-4">
+        <p class="text-sm text-base-grey text-left">Campos opcionales:</p>
 
-                <div class="flex gap-4">
-                    <input
-                        type="text"
-                        id="fname"
-                        name="fname"
-                        placeholder="Nombre"
-                        class="flex-1 px-4 py-3 bg-base-dark border border-neon-purple/50 rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/20 focus:outline-none"
-                    />
-                    <input
-                        type="text"
-                        id="lname"
-                        name="lname"
-                        placeholder="Apellido"
-                        class="flex-1 px-4 py-3 bg-base-dark border border-neon-purple/50 rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/20 focus:outline-none"
-                    />
-                </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <input
+            type="text"
+            id="fname"
+            name="fname"
+            placeholder="Nombre"
+            class="w-full sm:flex-1 px-4 py-3 bg-base-dark border border-neon-cyan rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none"
+          />
+          <input
+            type="text"
+            id="lname"
+            name="lname"
+            placeholder="Apellido"
+            class="w-full sm:flex-1 px-4 py-3 bg-base-dark border border-neon-cyan rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none"
+          />
+        </div>
 
-                <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="Teléfono (opcional)"
-                    class="w-full px-4 py-3 bg-base-dark border border-neon-purple/50 rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:ring-2 focus:ring-neon-purple/20 focus:outline-none"
-                />
-            </div>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Teléfono (opcional)"
+          class="w-full px-4 py-3 bg-base-dark border border-neon-cyan rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none"
+        />
+      </div>
 
-            <div class="flex flex-col sm:flex-row gap-4">
-                <button
-                    type="submit"
-                    class="w-full sm:w-auto px-6 py-3 bg-neon-purple text-base-dark font-semibold rounded-lg hover:bg-neon-purple/90 focus:ring-2 focus:ring-neon-purple/20 focus:outline-none transition-colors duration-200"
-                >
-                    Suscribirse
-                </button>
-            </div>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button
+          type="submit"
+          class="w-full px-6 py-3 bg-neon-purple text-base-dark font-semibold rounded-lg hover:bg-neon-purple/90 focus:ring-2 focus:ring-neon-purple/20 focus:outline-none transition-colors duration-200"
+        >
+          Suscribirse
+        </button>
+      </div>
 
-            <!-- Status messages -->
-            <div id="status-message" class="mt-4 hidden">
-                <p id="status-text" class="text-sm"></p>
-            </div>
-        </form>
-    </div>
-</NeonBox>
+      <!-- Status messages -->
+      <div id="status-message" class="mt-4 hidden">
+        <p id="status-text" class="text-sm"></p>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script>
-    const API_ENDPOINT =
-        "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-c2d034fb-2562-411a-bd05-4c1282a4a049/default/subscribe-worker";
+  const API_ENDPOINT =
+    "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-c2d034fb-2562-411a-bd05-4c1282a4a049/default/subscribe-worker";
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById(
-            "subscription-form",
-        ) as HTMLFormElement;
-        const emailInput = document.getElementById("email") as HTMLInputElement;
-        const optionalFields = document.getElementById(
-            "optional-fields",
-        ) as HTMLElement;
-        const statusMessage = document.getElementById(
-            "status-message",
-        ) as HTMLElement;
-        const statusText = document.getElementById(
-            "status-text",
-        ) as HTMLElement;
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById(
+      "subscription-form",
+    ) as HTMLFormElement;
+    const emailInput = document.getElementById("email") as HTMLInputElement;
+    const optionalFields = document.getElementById(
+      "optional-fields",
+    ) as HTMLElement;
+    const statusMessage = document.getElementById(
+      "status-message",
+    ) as HTMLElement;
+    const statusText = document.getElementById("status-text") as HTMLElement;
 
-        let showOptionalFields = false;
+    let showOptionalFields = false;
 
-        // Show optional fields when user clicks on email field
-        emailInput.addEventListener("focus", function () {
-            if (!showOptionalFields) {
-                showOptionalFields = true;
-                optionalFields.classList.remove("hidden");
-                optionalFields.classList.add("animate-fade-in");
-            }
-        });
-
-        // Hide optional fields when email field is empty and loses focus
-        emailInput.addEventListener("blur", function () {
-            if (this.value.length === 0 && showOptionalFields) {
-                showOptionalFields = false;
-                optionalFields.classList.add("hidden");
-                optionalFields.classList.remove("animate-fade-in");
-            }
-        });
-
-        // Handle form submission
-        form.addEventListener("submit", async function (e) {
-            e.preventDefault();
-
-            const submitButton = form.querySelector(
-                'button[type="submit"]',
-            ) as HTMLButtonElement;
-            const originalText = submitButton.textContent;
-
-            // Show loading state
-            submitButton.textContent = "Enviando...";
-            submitButton.disabled = true;
-
-            try {
-                // Prepare form data
-                const formData = new FormData(form);
-                const data: any = {
-                    email: formData.get("email"),
-                };
-
-                // Add optional fields only if they have values
-                const fname = formData.get("fname") as string;
-                const lname = formData.get("lname") as string;
-                const phone = formData.get("phone") as string;
-
-                if (fname && fname.trim()) data.fname = fname.trim();
-                if (lname && lname.trim()) data.lname = lname.trim();
-                if (phone && phone.trim()) data.phone = phone.trim();
-
-                // Send to API
-                const response = await fetch(API_ENDPOINT, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                if (response.ok) {
-                    showStatus(
-                        "¡Gracias! Te has suscrito correctamente.",
-                        "success",
-                    );
-                    form.reset();
-                    // Hide optional fields after successful submission
-                    optionalFields.classList.add("hidden");
-                    showOptionalFields = false;
-                } else {
-                    const errorData = await response.json().catch(() => ({}));
-                    showStatus(
-                        "Error al suscribirse. Por favor, inténtalo de nuevo.",
-                        "error",
-                    );
-                }
-            } catch (error) {
-                console.error("Subscription error:", error);
-                showStatus(
-                    "Error de conexión. Por favor, inténtalo de nuevo.",
-                    "error",
-                );
-            } finally {
-                // Restore button state
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            }
-        });
-
-        function showStatus(message: string, type: "success" | "error") {
-            statusText.textContent = message;
-            statusText.className = `text-sm ${type === "success" ? "text-green-400" : "text-red-400"}`;
-            statusMessage.classList.remove("hidden");
-
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
-                statusMessage.classList.add("hidden");
-            }, 5000);
-        }
+    // Show optional fields when user clicks on email field
+    emailInput.addEventListener("focus", function () {
+      if (!showOptionalFields) {
+        showOptionalFields = true;
+        optionalFields.classList.remove("hidden");
+        optionalFields.classList.add("animate-fade-in");
+      }
     });
+
+    // Hide optional fields when email field is empty and loses focus
+    // But only if the focus is not moving to another field in the form
+    emailInput.addEventListener("blur", function () {
+      // Use setTimeout to check if focus moved to another form field
+      setTimeout(() => {
+        const activeElement = document.activeElement;
+        const isFocusInForm = form.contains(activeElement);
+
+        if (this.value.length === 0 && showOptionalFields && !isFocusInForm) {
+          showOptionalFields = false;
+          optionalFields.classList.add("hidden");
+          optionalFields.classList.remove("animate-fade-in");
+        }
+      }, 100);
+    });
+
+    // Handle form submission
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const submitButton = form.querySelector(
+        'button[type="submit"]',
+      ) as HTMLButtonElement;
+      const originalText = submitButton.textContent;
+
+      // Show loading state
+      submitButton.textContent = "Enviando...";
+      submitButton.disabled = true;
+
+      try {
+        // Prepare form data
+        const formData = new FormData(form);
+        const data: any = {
+          email: formData.get("email"),
+        };
+
+        // Add optional fields only if they have values
+        const fname = formData.get("fname") as string;
+        const lname = formData.get("lname") as string;
+        const phone = formData.get("phone") as string;
+
+        if (fname && fname.trim()) data.fname = fname.trim();
+        if (lname && lname.trim()) data.lname = lname.trim();
+        if (phone && phone.trim()) data.phone = phone.trim();
+
+        // Send to API
+        const response = await fetch(API_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          showStatus("¡Gracias! Te has suscrito correctamente.", "success");
+          form.reset();
+          // Hide optional fields after successful submission
+          optionalFields.classList.add("hidden");
+          showOptionalFields = false;
+        } else {
+          const errorData = await response.json().catch(() => ({}));
+          showStatus(
+            "Error al suscribirse. Por favor, inténtalo de nuevo.",
+            "error",
+          );
+        }
+      } catch (error) {
+        console.error("Subscription error:", error);
+        showStatus(
+          "Error de conexión. Por favor, inténtalo de nuevo.",
+          "error",
+        );
+      } finally {
+        // Restore button state
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+      }
+    });
+
+    function showStatus(message: string, type: "success" | "error") {
+      statusText.textContent = message;
+      statusText.className = `text-sm ${type === "success" ? "text-green-400" : "text-red-400"}`;
+      statusMessage.classList.remove("hidden");
+
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        statusMessage.classList.add("hidden");
+      }, 5000);
+    }
+  });
 </script>
 
 <style>
-    @keyframes fade-in {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
     }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-    .animate-fade-in {
-        animation: fade-in 0.3s ease-out;
-    }
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
 </style>
