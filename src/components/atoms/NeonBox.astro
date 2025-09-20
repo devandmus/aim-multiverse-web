@@ -18,6 +18,10 @@ const {
   color,
 } = Astro.props;
 
+const getBorderWidth = (borders: [number, number, number, number]) => {
+  return `${borders.join("px ")}px`;
+};
+
 const getNeonColor = (color: "pink" | "yellow" | "cyan" | "purple") => {
   const colorMap = {
     pink: "#ff00a0",
@@ -28,27 +32,23 @@ const getNeonColor = (color: "pink" | "yellow" | "cyan" | "purple") => {
   return colorMap[color];
 };
 
-const generateBorderStyles = (borders: [number, number, number, number]) => {
-  const [top, right, bottom, left] = borders;
-  return {
-    borderTopWidth: top > 0 ? `${top}px` : "0px",
-    borderRightWidth: right > 0 ? `${right}px` : "0px",
-    borderBottomWidth: bottom > 0 ? `${bottom}px` : "0px",
-    borderLeftWidth: left > 0 ? `${left}px` : "0px",
-  };
-};
+const mobileBorderWidth = borderClass?.mobile
+  ? getBorderWidth(borderClass.mobile)
+  : "1px";
+const desktopBorderWidth = borderClass?.desktop
+  ? getBorderWidth(borderClass.desktop)
+  : "1px";
 ---
 
 <div class={`neon-wrapper ${className}`}>
   <div
     class={`neon-box ${className} ${color ? "static-color" : ""}`}
-    style={`${color ? `--neon-color: ${getNeonColor(color)};` : ""} ${transitionName ? `view-transition-name: ${transitionName}` : ""}`}
-    data-border-config={borderClass ? JSON.stringify(borderClass) : ""}
+    style={`${color ? `--neon-color: ${getNeonColor(color)};` : ""} ${transitionName ? `view-transition-name: ${transitionName}` : ""} --mobile-border: ${mobileBorderWidth}; --desktop-border: ${desktopBorderWidth}; border-width: var(--mobile-border);`}
   >
   </div>
   <div
     class={`neon-content h-full ${contentClass}`}
-    data-border-config={borderClass ? JSON.stringify(borderClass) : ""}
+    style={`--mobile-border: ${mobileBorderWidth}; --desktop-border: ${desktopBorderWidth}; border-width: var(--mobile-border);`}
   >
     <slot />
   </div>
@@ -84,21 +84,9 @@ const generateBorderStyles = (borders: [number, number, number, number]) => {
     background-size: 300% 300%;
   }
 
-  /* Bordes por defecto cuando no hay configuración */
-  .neon-box:not([data-border-config]) {
+  /* Bordes por defecto */
+  .neon-box {
     border-width: 1px;
-  }
-
-  /* Estilos dinámicos para mobile */
-  .neon-box[data-border-config] {
-    border-width: 1px;
-  }
-
-  /* Estilos dinámicos para desktop (>= 768px) */
-  @media (min-width: 768px) {
-    .neon-box[data-border-config] {
-      border-width: 1px;
-    }
   }
 
   /* Estilo para color estático */
@@ -113,23 +101,7 @@ const generateBorderStyles = (borders: [number, number, number, number]) => {
     position: relative;
     border-style: solid;
     border-color: transparent;
-  }
-
-  /* Bordes por defecto cuando no hay configuración */
-  .neon-content:not([data-border-config]) {
     border-width: 1px;
-  }
-
-  /* Estilos dinámicos para mobile */
-  .neon-content[data-border-config] {
-    border-width: 1px;
-  }
-
-  /* Estilos dinámicos para desktop (>= 768px) */
-  @media (min-width: 768px) {
-    .neon-content[data-border-config] {
-      border-width: 1px;
-    }
   }
 
   @keyframes neon-move {
@@ -143,38 +115,14 @@ const generateBorderStyles = (borders: [number, number, number, number]) => {
       background-position: 0% 50%;
     }
   }
-</style>
 
-<script>
-  // Función para aplicar estilos de borde dinámicos
-  function applyBorderStyles() {
-    const elements = document.querySelectorAll("[data-border-config]");
-
-    elements.forEach((element) => {
-      const config = element.getAttribute("data-border-config");
-      if (!config) return;
-
-      try {
-        const borderConfig = JSON.parse(config);
-        const isDesktop = window.innerWidth >= 768;
-        const borders = isDesktop ? borderConfig.desktop : borderConfig.mobile;
-
-        if (borders) {
-          const [top, right, bottom, left] = borders;
-          element.style.borderTopWidth = top > 0 ? `${top}px` : "0px";
-          element.style.borderRightWidth = right > 0 ? `${right}px` : "0px";
-          element.style.borderBottomWidth = bottom > 0 ? `${bottom}px` : "0px";
-          element.style.borderLeftWidth = left > 0 ? `${left}px` : "0px";
-        }
-      } catch (e) {
-        console.warn("Error parsing border config:", e);
-      }
-    });
+  /* Estilos responsive para desktop */
+  @media (min-width: 768px) {
+    .neon-box {
+      border-width: var(--desktop-border) !important;
+    }
+    .neon-content {
+      border-width: var(--desktop-border) !important;
+    }
   }
-
-  // Aplicar estilos al cargar
-  document.addEventListener("DOMContentLoaded", applyBorderStyles);
-
-  // Aplicar estilos al redimensionar
-  window.addEventListener("resize", applyBorderStyles);
-</script>
+</style>
