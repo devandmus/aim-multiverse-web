@@ -18,10 +18,6 @@ const {
   color,
 } = Astro.props;
 
-const getBorderWidth = (borders: [number, number, number, number]) => {
-  return `${borders.join("px ")}px`;
-};
-
 const getNeonColor = (color: "pink" | "yellow" | "cyan" | "purple") => {
   const colorMap = {
     pink: "#ff00a0",
@@ -32,23 +28,28 @@ const getNeonColor = (color: "pink" | "yellow" | "cyan" | "purple") => {
   return colorMap[color];
 };
 
+const getBorderWidth = (borders: [number, number, number, number]) => {
+  return `${borders.join("px ")}px`;
+};
+
+// Mobile first: por defecto usa mobile, desktop solo si se especifica
 const mobileBorderWidth = borderClass?.mobile
   ? getBorderWidth(borderClass.mobile)
-  : "1px";
+  : null;
 const desktopBorderWidth = borderClass?.desktop
   ? getBorderWidth(borderClass.desktop)
-  : "1px";
+  : null;
 ---
 
 <div class={`neon-wrapper ${className}`}>
   <div
     class={`neon-box ${className} ${color ? "static-color" : ""}`}
-    style={`${color ? `--neon-color: ${getNeonColor(color)};` : ""} ${transitionName ? `view-transition-name: ${transitionName}` : ""} --mobile-border: ${mobileBorderWidth}; --desktop-border: ${desktopBorderWidth}; border-width: var(--mobile-border);`}
+    style={`${color ? `--neon-color: ${getNeonColor(color)};` : ""} ${transitionName ? `view-transition-name: ${transitionName};` : ""} ${mobileBorderWidth ? `--mobile-border: ${mobileBorderWidth};` : ""} ${desktopBorderWidth ? `--desktop-border: ${desktopBorderWidth};` : ""} ${mobileBorderWidth ? `border-width: var(--mobile-border);` : ""}`}
   >
   </div>
   <div
     class={`neon-content h-full ${contentClass}`}
-    style={`--mobile-border: ${mobileBorderWidth}; --desktop-border: ${desktopBorderWidth}; border-width: var(--mobile-border);`}
+    style={`${mobileBorderWidth ? `--mobile-border: ${mobileBorderWidth};` : ""} ${desktopBorderWidth ? `--desktop-border: ${desktopBorderWidth};` : ""} ${mobileBorderWidth ? `border-width: var(--mobile-border);` : ""}`}
   >
     <slot />
   </div>
@@ -69,9 +70,8 @@ const desktopBorderWidth = borderClass?.desktop
     bottom: 0;
     z-index: 0;
 
-    /* Propiedades comunes de borde */
-    border-style: solid;
-    border-color: transparent;
+    /* Propiedades comunes de borde por defecto */
+    border: 1px solid transparent;
 
     /* Borde neon animado (por defecto) */
     background-image: linear-gradient(#000000, #000000),
@@ -84,11 +84,6 @@ const desktopBorderWidth = borderClass?.desktop
     background-size: 300% 300%;
   }
 
-  /* Bordes por defecto */
-  .neon-box {
-    border-width: 1px;
-  }
-
   /* Estilo para color estático */
   .neon-box.static-color {
     background-image: linear-gradient(#000000, #000000),
@@ -99,9 +94,7 @@ const desktopBorderWidth = borderClass?.desktop
 
   .neon-content {
     position: relative;
-    border-style: solid;
-    border-color: transparent;
-    border-width: 1px;
+    border: 1px solid transparent;
   }
 
   @keyframes neon-move {
@@ -118,10 +111,10 @@ const desktopBorderWidth = borderClass?.desktop
 
   /* Estilos responsive para desktop */
   @media (min-width: 768px) {
-    .neon-box {
+    .neon-box[style*="--desktop-border"] {
       border-width: var(--desktop-border) !important;
     }
-    .neon-content {
+    .neon-content[style*="--desktop-border"] {
       border-width: var(--desktop-border) !important;
     }
   }
