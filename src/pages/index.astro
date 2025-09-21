@@ -30,8 +30,8 @@ const latestPost = await getLatestPost();
               <p
                 class="text-lg md:text-xl lg:text-2xl text-gray-300 font-mono tracking-wide"
               >
-                Software Engineer, consultor en Gen AI y automación, creador de
-                contenldo y músico profesional. Creo en la tecnologia como motor
+                Tech Lead, consultor en Gen AI y automación, creador de
+                contenido y músico profesional. Creo en la tecnología como motor
                 creativo y en el arte como fuerza.
               </p>
             </div>
@@ -79,7 +79,7 @@ const latestPost = await getLatestPost();
             <div class="">
               <div>
                 <NeonBox
-                  class="md:rounded-lg"
+                  class="md:rounded-br-lg"
                   borderClass={{ mobile: [0, 0, 1, 0], desktop: [0, 1, 1, 0] }}
                 >
                   <figure class="font-0 -mx-6 md:mx-0">
@@ -130,21 +130,19 @@ const latestPost = await getLatestPost();
 
               {
                 latestPost && (
-                  <a href={getPostUrl(latestPost.slug)}>
-                    <ArticleCard
-                      title={latestPost.data.title}
-                      id={latestPost.slug}
-                      titleSize="text-2xl md:text-3xl"
-                      tags={latestPost.data.tags || []}
-                      color={getColorByCategory(latestPost.data.category || "")}
-                      readTime={
-                        latestPost.data.readingTime ||
-                        `${Math.ceil(Math.random() * 15 + 5)} min`
-                      }
-                      slug={getPostUrl(latestPost.slug)}
-                      category={latestPost.data.category || ""}
-                    />
-                  </a>
+                  <ArticleCard
+                    title={latestPost.data.title}
+                    id={latestPost.slug}
+                    titleSize="text-2xl md:text-3xl"
+                    tags={latestPost.data.tags || []}
+                    color={getColorByCategory(latestPost.data.category || "")}
+                    readTime={
+                      latestPost.data.readingTime ||
+                      `${Math.ceil(Math.random() * 15 + 5)} min`
+                    }
+                    url={getPostUrl(latestPost.slug)}
+                    category={latestPost.data.category || ""}
+                  />
                 )
               }
             </div>

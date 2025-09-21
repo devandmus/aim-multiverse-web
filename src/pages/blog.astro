@@ -41,7 +41,12 @@ const publishedPosts = allPosts;
           <ArticlesGrid posts={publishedPosts.slice(0, 6)} gridColor="cyan" />
 
           <!-- Suscripción -->
-          <SubscriptionBox color="cyan" />
+          <NeonBox
+            borderClass={{ mobile: [1, 0, 0, 0], desktop: [1, 0, 0, 0] }}
+            class="w-full"
+          >
+            <SubscriptionBox color="cyan" />
+          </NeonBox>
         </NeonBox>
       </div>
     </div>
