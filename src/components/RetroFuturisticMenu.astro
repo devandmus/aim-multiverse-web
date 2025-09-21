@@ -11,7 +11,7 @@
     >
         <button
             id="back-btn"
-            class="group relative w-12 h-12 bg-black/80 backdrop-blur-xl border border-neon-cyan/50 rounded-full flex items-center justify-center hover:border-neon-cyan hover:bg-neon-cyan/10 transition-all duration-300 hover:scale-110 cursor-pointer"
+            class="group relative w-12 h-12 bg-black backdrop-blur-xl border border-neon-cyan/50 rounded-full flex items-center justify-center hover:border-neon-cyan hover:bg-neon-cyan/10 transition-all duration-300 hover:scale-110 cursor-pointer"
         >
             <svg
                 class="w-6 h-6 text-neon-cyan group-hover:text-white transition-colors"
@@ -38,18 +38,42 @@
     >
         <button
             id="menu-toggle"
-            class="group relative w-14 h-14 bg-black/80 backdrop-blur-xl border border-neon-pink/50 rounded-full flex items-center justify-center hover:border-neon-pink hover:bg-neon-pink/10 transition-all duration-300 hover:scale-110 cursor-pointer"
+            class="group relative w-12 h-12 bg-black/80 backdrop-blur-xl border border-neon-pink/50 rounded-full flex items-center justify-center hover:border-neon-pink hover:bg-neon-pink/10 transition-all duration-300 hover:scale-110 cursor-pointer"
         >
-            <div class="relative w-6 h-6" id="hamburger-icon">
-                <span
-                    class="absolute top-1 left-0 w-6 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white hamburger-line"
-                ></span>
-                <span
-                    class="absolute top-3 left-0 w-6 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white hamburger-line"
-                ></span>
-                <span
-                    class="absolute top-5 left-0 w-6 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white hamburger-line"
-                ></span>
+            <div
+                class="relative w-6 h-6 flex items-center justify-center"
+                id="menu-icon"
+            >
+                <!-- Ícono de menú (3 líneas horizontales) -->
+                <div class="menu-lines">
+                    <div
+                        class="w-4 h-0.5 bg-neon-pink mb-1 transition-all duration-300 group-hover:bg-white"
+                    >
+                    </div>
+                    <div
+                        class="w-4 h-0.5 bg-neon-pink mb-1 transition-all duration-300 group-hover:bg-white"
+                    >
+                    </div>
+                    <div
+                        class="w-4 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white"
+                    >
+                    </div>
+                </div>
+                <!-- Ícono de cerrar (X) -->
+                <div
+                    class="close-icon absolute opacity-0 transition-all duration-300"
+                >
+                    <svg
+                        class="w-5 h-5 text-neon-pink group-hover:text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </div>
             </div>
             <div
                 class="absolute inset-0 rounded-full bg-gradient-to-r from-neon-pink/20 to-neon-yellow/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -473,7 +497,7 @@
                 // Ocultar flecha de navegación
                 this.hideBackArrow();
 
-                // Convertir hamburguesa en X
+                // Convertir menú en X
                 this.transformHamburgerToX();
 
                 // Animar elementos del menú
@@ -506,7 +530,7 @@
                 // Restaurar flecha de navegación
                 this.trackNavigation();
 
-                // Convertir X de vuelta a hamburguesa
+                // Convertir X de vuelta a menú
                 this.transformXToHamburger();
 
                 // Delay para permitir que la animación termine antes de deshabilitar pointer-events
@@ -576,34 +600,26 @@
         }
 
         transformHamburgerToX() {
-            const hamburgerIcon = document.getElementById("hamburger-icon");
-            if (hamburgerIcon) {
-                const lines = hamburgerIcon.querySelectorAll(".hamburger-line");
-                if (lines.length === 3) {
-                    // Línea superior: rotar 45 grados y mover hacia el centro
-                    (lines[0] as HTMLElement).style.transform =
-                        "rotate(45deg) translate(0, 7px)";
-                    // Línea media: desaparecer
-                    (lines[1] as HTMLElement).style.opacity = "0";
-                    // Línea inferior: rotar -45 grados y mover hacia el centro
-                    (lines[2] as HTMLElement).style.transform =
-                        "rotate(-45deg) translate(0, -7px)";
-                }
+            const menuLines = document.querySelector(".menu-lines");
+            const closeIcon = document.querySelector(".close-icon");
+
+            if (menuLines && closeIcon) {
+                (menuLines as HTMLElement).style.opacity = "0";
+                (menuLines as HTMLElement).style.transform = "scale(0.8)";
+                (closeIcon as HTMLElement).style.opacity = "1";
+                (closeIcon as HTMLElement).style.transform = "scale(1)";
             }
         }
 
         transformXToHamburger() {
-            const hamburgerIcon = document.getElementById("hamburger-icon");
-            if (hamburgerIcon) {
-                const lines = hamburgerIcon.querySelectorAll(".hamburger-line");
-                if (lines.length === 3) {
-                    // Restaurar líneas a posición original
-                    (lines[0] as HTMLElement).style.transform =
-                        "rotate(0deg) translate(0, 0)";
-                    (lines[1] as HTMLElement).style.opacity = "1";
-                    (lines[2] as HTMLElement).style.transform =
-                        "rotate(0deg) translate(0, 0)";
-                }
+            const menuLines = document.querySelector(".menu-lines");
+            const closeIcon = document.querySelector(".close-icon");
+
+            if (menuLines && closeIcon) {
+                (menuLines as HTMLElement).style.opacity = "1";
+                (menuLines as HTMLElement).style.transform = "scale(1)";
+                (closeIcon as HTMLElement).style.opacity = "0";
+                (closeIcon as HTMLElement).style.transform = "scale(0.8)";
             }
         }
 
@@ -788,10 +804,18 @@
         );
     }
 
-    /* Transiciones de hamburguesa a X */
-    .hamburger-line {
+    /* Transiciones de menú a X */
+    .menu-lines,
+    .close-icon {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         transform-origin: center;
+    }
+
+    .menu-lines {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     /* Asegurar máxima prioridad de apilamiento para elementos del menú */
