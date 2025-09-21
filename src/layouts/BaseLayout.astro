@@ -16,6 +16,10 @@ const {
   posts = [],
 } = Astro.props;
 
+// Construir URL completa dinámicamente usando Astro.url
+const baseUrl = "https://andres-maldonado.com";
+const fullUrl = `${baseUrl}${Astro.url.pathname}`;
+
 // Generar prefetch links para los posts
 const prefetchLinks = posts.map((post) => ({
   href: `/blog/${post.slug}`,
@@ -55,7 +59,7 @@ const prefetchLinks = posts.map((post) => ({
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://andres-maldonado.com/" />
+    <meta property="og:url" content={fullUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta
@@ -71,7 +75,7 @@ const prefetchLinks = posts.map((post) => ({
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://andres-maldonado.com/" />
+    <meta property="twitter:url" content={fullUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta
