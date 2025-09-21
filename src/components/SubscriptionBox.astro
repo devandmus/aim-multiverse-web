@@ -35,40 +35,86 @@ const {
         />
       </div>
 
-      <!-- Optional fields - hidden by default -->
-      <div id="optional-fields" class="hidden space-y-4 mb-4">
-        <p class="text-sm text-base-grey text-left">Campos opcionales:</p>
+      <!-- Toggle button for additional fields -->
+      <div class="flex justify-center my-6">
+        <button
+          type="button"
+          id="toggle-fields-btn"
+          class="group relative flex items-center gap-3 px-6 py-3 text-sm font-medium text-base-light bg-gradient-to-r from-neon-purple/10 to-neon-cyan/10 rounded-lg hover:cursor-pointer"
+        >
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-neon-purple rounded-full animate-pulse">
+            </div>
+            <span class="tracking-wider">CAMPOS ADICIONALES</span>
+          </div>
+          <svg
+            id="toggle-arrow"
+            class="w-4 h-4 transition-transform duration-500 ease-in-out group-hover:scale-110"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+          <!-- Glow effect -->
+          <div
+            class="absolute inset-0 rounded-lg bg-gradient-to-r from-neon-purple/20 to-neon-cyan/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm -z-10"
+          >
+          </div>
+        </button>
+      </div>
 
-        <div class="flex flex-col sm:flex-row gap-4">
-          <input
-            type="text"
-            id="fname"
-            name="fname"
-            placeholder="Nombre"
-            class="w-full sm:flex-1 px-4 py-3 bg-base-dark border border-neon-cyan rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none"
-          />
-          <input
-            type="text"
-            id="lname"
-            name="lname"
-            placeholder="Apellido"
-            class="w-full sm:flex-1 px-4 py-3 bg-base-dark border border-neon-cyan rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none"
-          />
+      <!-- Optional fields container with smooth growth animation -->
+      <div
+        id="optional-fields-container"
+        class="overflow-hidden transition-all duration-500 ease-in-out"
+      >
+        <div
+          id="optional-fields"
+          class="space-y-4 mb-6 transform scale-y-0 origin-top transition-all duration-500 ease-in-out"
+        >
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-1 h-1 bg-neon-cyan rounded-full"></div>
+            <p class="text-sm text-base-grey">Opcionales:</p>
+          </div>
+
+          <div class="pb-4">
+            <div class="flex flex-col sm:flex-row gap-4 pb-4">
+              <input
+                type="text"
+                id="fname"
+                name="fname"
+                placeholder="Nombre"
+                class="w-full sm:flex-1 px-4 py-3 bg-base-dark border border-neon-cyan/50 rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none transition-colors duration-200"
+              />
+              <input
+                type="text"
+                id="lname"
+                name="lname"
+                placeholder="Apellido"
+                class="w-full sm:flex-1 px-4 py-3 bg-base-dark border border-neon-cyan/50 rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none transition-colors duration-200"
+              />
+            </div>
+
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Teléfono / WhatsApp"
+              class="w-full px-4 py-3 bg-base-dark border border-neon-cyan/50 rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none transition-colors duration-200"
+            />
+          </div>
         </div>
-
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="Teléfono (opcional)"
-          class="w-full px-4 py-3 bg-base-dark border border-neon-cyan rounded-lg text-base-light placeholder-base-grey focus:border-neon-purple focus:outline-none"
-        />
       </div>
 
       <div class="flex flex-col sm:flex-row gap-4">
         <button
           type="submit"
-          class="w-full px-6 py-3 bg-neon-purple text-base-dark font-semibold rounded-lg hover:bg-neon-purple/90 focus:ring-2 focus:ring-neon-purple/20 focus:outline-none transition-colors duration-200"
+          class="w-full px-6 py-3 bg-neon-purple text-base-dark font-semibold rounded-lg hover:bg-neon-purple/90 focus:ring-2 focus:ring-neon-purple/20 focus:outline-none transition-colors duration-200 hover:cursor-pointer"
         >
           Suscribirse
         </button>
@@ -91,9 +137,16 @@ const {
       "subscription-form",
     ) as HTMLFormElement;
     const emailInput = document.getElementById("email") as HTMLInputElement;
+    const optionalFieldsContainer = document.getElementById(
+      "optional-fields-container",
+    ) as HTMLElement;
     const optionalFields = document.getElementById(
       "optional-fields",
     ) as HTMLElement;
+    const toggleBtn = document.getElementById(
+      "toggle-fields-btn",
+    ) as HTMLButtonElement;
+    const toggleArrow = document.getElementById("toggle-arrow") as HTMLElement;
     const statusMessage = document.getElementById(
       "status-message",
     ) as HTMLElement;
@@ -101,29 +154,33 @@ const {
 
     let showOptionalFields = false;
 
-    // Show optional fields when user clicks on email field
-    emailInput.addEventListener("focus", function () {
+    // Toggle optional fields with smooth growth animation
+    toggleBtn.addEventListener("click", function () {
       if (!showOptionalFields) {
+        // Show fields with growth animation
         showOptionalFields = true;
-        optionalFields.classList.remove("hidden");
-        optionalFields.classList.add("animate-fade-in");
+        optionalFieldsContainer.style.maxHeight = "0px";
+        optionalFields.classList.remove("scale-y-0");
+        optionalFields.classList.add("scale-y-100");
+
+        // Calculate the height and animate
+        setTimeout(() => {
+          const height = optionalFields.scrollHeight;
+          optionalFieldsContainer.style.maxHeight = height + "px";
+        }, 10);
+
+        // Rotate arrow
+        toggleArrow.classList.add("rotate-180");
+      } else {
+        // Hide fields with shrink animation
+        showOptionalFields = false;
+        optionalFieldsContainer.style.maxHeight = "0px";
+        optionalFields.classList.remove("scale-y-100");
+        optionalFields.classList.add("scale-y-0");
+
+        // Rotate arrow back
+        toggleArrow.classList.remove("rotate-180");
       }
-    });
-
-    // Hide optional fields when email field is empty and loses focus
-    // But only if the focus is not moving to another field in the form
-    emailInput.addEventListener("blur", function () {
-      // Use setTimeout to check if focus moved to another form field
-      setTimeout(() => {
-        const activeElement = document.activeElement;
-        const isFocusInForm = form.contains(activeElement);
-
-        if (this.value.length === 0 && showOptionalFields && !isFocusInForm) {
-          showOptionalFields = false;
-          optionalFields.classList.add("hidden");
-          optionalFields.classList.remove("animate-fade-in");
-        }
-      }, 100);
     });
 
     // Handle form submission
@@ -168,8 +225,11 @@ const {
           showStatus("¡Gracias! Te has suscrito correctamente.", "success");
           form.reset();
           // Hide optional fields after successful submission
-          optionalFields.classList.add("hidden");
           showOptionalFields = false;
+          optionalFieldsContainer.style.maxHeight = "0px";
+          optionalFields.classList.remove("scale-y-100");
+          optionalFields.classList.add("scale-y-0");
+          toggleArrow.classList.remove("rotate-180");
         } else {
           const errorData = await response.json().catch(() => ({}));
           showStatus(
@@ -217,5 +277,34 @@ const {
 
   .animate-fade-in {
     animation: fade-in 0.3s ease-out;
+  }
+
+  /* Smooth growth animation */
+  #optional-fields-container {
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Scale animation for content */
+  #optional-fields {
+    transform-origin: top;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Futuristic button glow effect */
+  #toggle-fields-btn::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #8b5cf6, #06b6d4, #8b5cf6);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(4px);
+  }
+
+  #toggle-fields-btn:hover::before {
+    opacity: 0.3;
   }
 </style>
