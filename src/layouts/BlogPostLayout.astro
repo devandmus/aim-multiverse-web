@@ -7,6 +7,7 @@ import SubscriptionSection from "../components/SubscriptionSection.astro";
 import { getCollection } from "astro:content";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import SubscriptionBox from "../components/SubscriptionBox.astro";
 
 export interface Props {
   frontmatter: any;
@@ -42,7 +43,7 @@ const allPosts = await getCollection("blog");
       <div class="max-w-6xl mx-auto px-6">
         <div class="text-center">
           <h1
-            class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
+            class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight pt-6 md:pt-12"
             style={`view-transition-name: article-title-${currentPost.slug}`}
           >
             {frontmatter.title}
@@ -53,24 +54,28 @@ const allPosts = await getCollection("blog");
               {frontmatter.description}
             </p>
             <!-- Autor Section -->
-            <div class="flex items-center justify-center gap-4 mb-8">
-              <div
-                class="w-12 h-12 rounded-full overflow-hidden border-2 border-neon-cyan"
-              >
-                <img
-                  src="/images/andres-cuadrado.jpg"
-                  alt="Andrés Maldonado"
-                  class="w-full h-full object-cover"
-                />
-              </div>
-              <div class="text-left">
-                <div class="text-white font-semibold text-lg">
-                  Andrés Maldonado
+            <div class="flex justify-center mb-8">
+              <a href="/about">
+                <div class="flex items-center justify-center gap-4">
+                  <div
+                    class="w-12 h-12 rounded-full overflow-hidden border-2 border-neon-cyan"
+                  >
+                    <img
+                      src="/images/andres-cuadrado.jpg"
+                      alt="Andrés Maldonado"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="text-left">
+                    <div class="text-white font-semibold text-lg">
+                      Andrés Ignacio Maldonado
+                    </div>
+                    <div class="text-gray-400 text-sm">
+                      Tech Lead | AI | Marketer | Musician
+                    </div>
+                  </div>
                 </div>
-                <div class="text-gray-400 text-sm">
-                  Desarrollador Full Stack
-                </div>
-              </div>
+              </a>
             </div>
             <!-- Metadatos -->
             <div class="flex flex-wrap items-center gap-4 justify-center">
@@ -202,40 +207,7 @@ const allPosts = await getCollection("blog");
     <ArticleNavigation currentPost={currentPost} allPosts={allPosts} />
 
     <!-- Sección de suscripción -->
-    <section class="py-20 bg-gradient-to-br from-neon-cyan/5 to-neon-pink/5">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <div
-          class="bg-black/80 backdrop-blur-sm rounded-2xl p-12 border border-neon-cyan/20 shadow-2xl"
-        >
-          <div class="mb-8">
-            <h2 class="text-4xl font-bold text-white mb-4">
-              ¿Te gustó este artículo?
-            </h2>
-            <p class="text-xl text-gray-300 leading-relaxed">
-              Suscríbete a mi newsletter y recibe contenido exclusivo sobre
-              desarrollo web, JavaScript y las últimas tendencias en tecnología.
-            </p>
-          </div>
-
-          <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Tu email aquí"
-              class="flex-1 px-6 py-4 bg-black/50 border border-neon-cyan/30 rounded-lg text-white placeholder-gray-400 focus:border-neon-cyan focus:outline-none focus:ring-2 focus:ring-neon-cyan/20 transition-all"
-            />
-            <button
-              class="px-8 py-4 bg-gradient-to-r from-neon-cyan to-neon-pink text-black font-bold rounded-lg hover:scale-105 transition-transform shadow-lg hover:shadow-neon-cyan/25"
-            >
-              Suscribirse
-            </button>
-          </div>
-
-          <p class="text-sm text-gray-400 mt-6">
-            Sin spam. Cancela cuando quieras. Respetamos tu privacidad.
-          </p>
-        </div>
-      </div>
-    </section>
+    <SubscriptionBox color="cyan" />
   </main>
 
   <Footer />

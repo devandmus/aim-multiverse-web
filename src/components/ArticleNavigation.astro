@@ -36,7 +36,7 @@ const nextPost = publishedPosts[nextIndex];
     <div class="max-w-6xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-6">
             <!-- Artículo Anterior -->
-            <NeonBox color="cyan">
+            <NeonBox color="cyan" class="rounded-lg">
                 <a href={`/blog/${previousPost.slug}`} class="h-full">
                     <div class="flex items-center gap-4 p-6 h-full">
                         <div class="flex-shrink-0">
@@ -73,7 +73,7 @@ const nextPost = publishedPosts[nextIndex];
             </NeonBox>
 
             <!-- Artículo Siguiente -->
-            <NeonBox color="pink">
+            <NeonBox color="pink" class="rounded-lg">
                 <a href={`/blog/${nextPost.slug}`} class="h-full">
                     <div class="flex items-center gap-4 p-6 h-full">
                         <div class="flex-1 min-w-0 text-right">

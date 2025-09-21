@@ -17,7 +17,7 @@ const publishedPosts = allPosts;
   posts={publishedPosts}
 >
   <Wrapper>
-    <NeonBox class="max-w-6xl mx-auto" transitionName="blog-page">
+    <div class="max-w-6xl mx-auto">
       <div>
         <!-- Header del Blog -->
         <div class="p-12">
@@ -36,12 +36,14 @@ const publishedPosts = allPosts;
           </div>
         </div>
 
-        <!-- Grid de artículos con el primero como destacado -->
-        <ArticlesGrid posts={publishedPosts.slice(0, 6)} gridColor="cyan" />
+        <NeonBox class="max-w-6xl mx-auto" transitionName="blog-page">
+          <!-- Grid de artículos con el primero como destacado -->
+          <ArticlesGrid posts={publishedPosts.slice(0, 6)} gridColor="cyan" />
 
-        <!-- Suscripción -->
-        <SubscriptionBox color="cyan" />
+          <!-- Suscripción -->
+          <SubscriptionBox color="cyan" />
+        </NeonBox>
       </div>
-    </NeonBox>
+    </div>
   </Wrapper>
 </BaseLayout>

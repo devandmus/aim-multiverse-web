@@ -368,7 +368,6 @@ a.blog-link:hover {
 
 .blog-content-wrapper pre {
   background: linear-gradient(135deg, #0a0a0a, #1a1a1a) !important;
-  border: 1px solid var(--neon-cyan) !important;
   padding: 2rem !important;
   margin: 3rem 0 !important;
   overflow-x: auto !important;
