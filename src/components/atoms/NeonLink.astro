@@ -1,0 +1,91 @@
+---
+import NeonBox from "./NeonBox.astro";
+
+interface Props {
+  href: string;
+  target?: string;
+  rel?: string;
+  color?: "pink" | "yellow" | "cyan" | "purple";
+  class?: string;
+  contentClass?: string;
+  borderClass?: {
+    mobile?: [number, number, number, number];
+    desktop?: [number, number, number, number];
+  };
+  transitionName?: string;
+  label?: string;
+}
+
+const {
+  href,
+  target = "_self",
+  rel,
+  color,
+  class: className,
+  contentClass,
+  borderClass,
+  transitionName,
+  label,
+} = Astro.props;
+---
+
+<a href={href} target={target} rel={rel} class="neon-link group font-mono">
+  <NeonBox
+    class={className || "rounded-lg p-4 w-full text-center"}
+    contentClass={contentClass}
+    borderClass={borderClass}
+    transitionName={transitionName}
+    color={color}
+  >
+    {label ? label : <slot />}
+  </NeonBox>
+</a>
+
+<style>
+  .neon-link {
+    display: block;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .neon-link:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Efectos específicos por color */
+  .neon-link:hover [class*="static-color"][style*="pink"],
+  .neon-link:hover [class*="static-color"][style*="#ff00a0"] {
+    box-shadow:
+      0 0 20px rgba(255, 0, 160, 0.8),
+      0 0 30px rgba(255, 0, 160, 0.6);
+  }
+
+  .neon-link:hover [class*="static-color"][style*="purple"],
+  .neon-link:hover [class*="static-color"][style*="#a020f0"] {
+    box-shadow:
+      0 0 20px rgba(160, 32, 240, 0.8),
+      0 0 30px rgba(160, 32, 240, 0.6);
+  }
+
+  .neon-link:hover [class*="static-color"][style*="cyan"],
+  .neon-link:hover [class*="static-color"][style*="#00fff7"] {
+    box-shadow:
+      0 0 20px rgba(0, 255, 247, 0.8),
+      0 0 30px rgba(0, 255, 247, 0.6);
+  }
+
+  .neon-link:hover [class*="static-color"][style*="yellow"],
+  .neon-link:hover [class*="static-color"][style*="#f8f32b"] {
+    box-shadow:
+      0 0 20px rgba(248, 243, 43, 0.8),
+      0 0 30px rgba(248, 243, 43, 0.6);
+  }
+
+  /* Efecto general para bordes animados */
+  .neon-link:hover [class*="neon-box"]:not([class*="static-color"]) {
+    box-shadow:
+      0 0 20px rgba(255, 0, 160, 0.4),
+      0 0 30px rgba(0, 255, 247, 0.4),
+      0 0 40px rgba(160, 32, 240, 0.3);
+  }
+</style>

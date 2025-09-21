@@ -10,7 +10,7 @@ import { getLatestPost, getColorByCategory, getPostUrl } from "../lib/blog";
 import { Image } from "astro:assets";
 import andresMacbook from "../assets/images/andres-macbook.jpg";
 import andresGuitarra from "../assets/images/andres-guitarra.jpeg";
-
+import NeonLink from "../components/atoms/NeonLink.astro";
 // Obtener el artículo más reciente del blog
 const latestPost = await getLatestPost();
 ---
@@ -41,24 +41,36 @@ const latestPost = await getLatestPost();
             class=""
             borderClass={{ mobile: [1, 0, 0, 0], desktop: [0, 0, 0, 1] }}
           >
-            <div>
+            <div class="relative h-full">
               <h2
                 class="text-3xl font-bold mb-4 font-mono absolute top-6 left-15 z-10"
               >
                 ABOUT
               </h2>
               <Gradients ltrbtu={false} />
-              <figure>
-                <Image
-                  src={andresMacbook}
-                  alt="Andrés Ignacio Maldonado"
-                  width={800}
-                  height={800}
-                  class="rounded-lg"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </figure>
+              <div class="relative w-full h-full overflow-hidden rounded-lg">
+                <figure>
+                  <Image
+                    src={andresMacbook}
+                    alt="Andrés Ignacio Maldonado"
+                    width={800}
+                    height={800}
+                    class="rounded-lg absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+                <!-- Contenido encima de la imagen -->
+                <div class="relative z-10 h-full text-white min-h-64">
+                  <div class="absolute bottom-6 left-6">
+                    <a href="/about">
+                      <NeonBox class="p-6">
+                        <span class="font-bold">Sobre mí</span>
+                      </NeonBox>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </NeonBox>
         </div>
@@ -72,36 +84,34 @@ const latestPost = await getLatestPost();
             <div class="">
               <div>
                 <NeonBox
-                  class="rounded-lg"
-                  borderClass={{ mobile: [1, 1, 1, 1], desktop: [0, 1, 1, 0] }}
+                  class="md:rounded-lg"
+                  borderClass={{ mobile: [0, 0, 1, 0], desktop: [0, 1, 1, 0] }}
                 >
-                  <figure class="font-0">
+                  <figure class="font-0 -mx-6 md:mx-0">
                     <Image
                       src={andresGuitarra}
                       alt="Andrés Ignacio Maldonado"
-                      width={1200}
-                      height={800}
-                      class="font-0 rounded-tr-lg rounded-tl-lg"
+                      width={900}
+                      height={600}
+                      class="font-0 md:rounded-tr-lg md:rounded-tl-lg"
                       loading="lazy"
                       decoding="async"
                     />
                   </figure>
-                  <div class="px-4 py-6">
-                    <NeonButton
+                  <div class="md:px-4 py-6 grid gap-4">
+                    <NeonLink
+                      href="/hub"
                       label="@devandmus - RRSS"
-                      href="/music"
                       color="cyan"
-                      class="mb-4"
                     />
-                    <NeonButton
+                    <NeonLink
+                      href="https://tiktok.com/@devandmus"
                       label="Guitar Licks - TikTok"
-                      href="/music"
                       color="pink"
-                      class="mb-4"
                     />
-                    <NeonButton
+                    <NeonLink
+                      href="/hub"
                       label="One Lick a Day - YouTube"
-                      href="/music"
                       color="purple"
                     />
                   </div>
@@ -110,41 +120,55 @@ const latestPost = await getLatestPost();
             </div>
 
             <div>
+              <div>
+                <NeonLink href="/blog" transitionName="blog-page">
+                  <h3
+                    class="text-lg font-bold text-base-light flex items-center justify-center gap-3"
+                  >
+                    BLOG & ARTÍCULOS
+                  </h3>
+                  <p class="text-base-grey text-sm">
+                    AI • Dev • Música • Liderazgo
+                  </p>
+                </NeonLink>
+              </div>
               <div class="pb-6">
-                <NeonBox
-                  transitionName="blog-page"
-                  class="rounded-xl w-full"
-                  contentClass="p-6"
+                <a
+                  href="/blog"
+                  data-astro-prefetch
+                  class="relative blog-button text-neon-cyan font-bold"
                 >
-                  <a
-                    href="/blog"
-                    data-astro-prefetch
-                    class="relative blog-button text-neon-cyan font-bold"
+                  <!-- <NeonBox
+                    transitionName="blog-page"
+                    class="rounded-xl w-full"
+                    contentClass="p-6"
                   >
                     <div
                       class="text-neon-cyan font-bold text-2xl flex items-center justify-center h-full w-full h-full"
                     >
-                      Blog
+                      Blog & Artículos
                     </div>
-                  </a>
-                </NeonBox>
+                  </NeonBox> -->
+                </a>
               </div>
 
               {
                 latestPost && (
-                  <ArticleCard
-                    title={latestPost.data.title}
-                    id={latestPost.slug}
-                    titleSize="text-2xl md:text-3xl"
-                    tags={latestPost.data.tags || []}
-                    color={getColorByCategory(latestPost.data.category || "")}
-                    readTime={
-                      latestPost.data.readingTime ||
-                      `${Math.ceil(Math.random() * 15 + 5)} min`
-                    }
-                    slug={getPostUrl(latestPost.slug)}
-                    category={latestPost.data.category || ""}
-                  />
+                  <a href={getPostUrl(latestPost.slug)}>
+                    <ArticleCard
+                      title={latestPost.data.title}
+                      id={latestPost.slug}
+                      titleSize="text-2xl md:text-3xl"
+                      tags={latestPost.data.tags || []}
+                      color={getColorByCategory(latestPost.data.category || "")}
+                      readTime={
+                        latestPost.data.readingTime ||
+                        `${Math.ceil(Math.random() * 15 + 5)} min`
+                      }
+                      slug={getPostUrl(latestPost.slug)}
+                      category={latestPost.data.category || ""}
+                    />
+                  </a>
                 )
               }
             </div>

@@ -5,7 +5,12 @@ interface Props {
   color: "pink" | "purple" | "cyan" | "yellow";
   class?: string;
 }
-const { label = "Botón", href = "#", color = "pink", class: className = "" } = Astro.props;
+const {
+  label = "Botón",
+  href = "#",
+  color = "pink",
+  class: className = "",
+} = Astro.props;
 
 // Usar los colores del tema neón
 const gradients = {
@@ -17,9 +22,13 @@ const gradients = {
 ---
 
 <div class={className}>
-    <a href={href} class="neon-button" style={`--border-gradient: ${gradients[color]};`}>
-  {label}
-</a>
+  <a
+    href={href}
+    class="neon-button"
+    style={`--border-gradient: ${gradients[color]};`}
+  >
+    {label}
+  </a>
 </div>
 
 <style>
@@ -50,22 +59,26 @@ const gradients = {
 
   /* Efectos específicos por color */
   .neon-button[style*="pink"]:hover {
-    box-shadow: 0 0 20px rgba(255, 0, 160, 0.8),
-                0 0 30px rgba(255, 0, 160, 0.6);
+    box-shadow:
+      0 0 20px rgba(255, 0, 160, 0.8),
+      0 0 30px rgba(255, 0, 160, 0.6);
   }
 
   .neon-button[style*="purple"]:hover {
-    box-shadow: 0 0 20px rgba(160, 32, 240, 0.8),
-                0 0 30px rgba(160, 32, 240, 0.6);
+    box-shadow:
+      0 0 20px rgba(160, 32, 240, 0.8),
+      0 0 30px rgba(160, 32, 240, 0.6);
   }
 
   .neon-button[style*="cyan"]:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 247, 0.8),
-                0 0 30px rgba(0, 255, 247, 0.6);
+    box-shadow:
+      0 0 20px rgba(0, 255, 247, 0.8),
+      0 0 30px rgba(0, 255, 247, 0.6);
   }
 
   .neon-button[style*="yellow"]:hover {
-    box-shadow: 0 0 20px rgba(248, 243, 43, 0.8),
-                0 0 30px rgba(248, 243, 43, 0.6);
+    box-shadow:
+      0 0 20px rgba(248, 243, 43, 0.8),
+      0 0 30px rgba(248, 243, 43, 0.6);
   }
 </style>
