@@ -27,12 +27,17 @@ const prefetchLinks = posts.map((post) => ({
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DVKQKRWPDC"
     ></script>
     <script>
+      // @ts-ignore
       window.dataLayer = window.dataLayer || [];
+      // @ts-ignore
       function gtag() {
+        // @ts-ignore
         dataLayer.push(arguments);
       }
+      // @ts-ignore
       gtag("js", new Date());
 
+      // @ts-ignore
       gtag("config", "G-DVKQKRWPDC");
     </script>
     <meta charset="UTF-8" />
