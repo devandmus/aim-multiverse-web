@@ -3,7 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import NeonBox from "../components/atoms/NeonBox.astro";
 import Wrapper from "../components/skeleton/Wrapper.astro";
 import ArticlesGrid from "../components/ArticlesGrid.astro";
-import SubscriptionBox from "../components/SubscriptionBox.astro";
 import { getAllPosts } from "../lib/blog";
 
 // Obtener artículos para mostrar en el blog
@@ -39,14 +38,6 @@ const publishedPosts = allPosts;
         <NeonBox class="max-w-6xl mx-auto" transitionName="blog-page">
           <!-- Grid de artículos con el primero como destacado -->
           <ArticlesGrid posts={publishedPosts.slice(0, 6)} gridColor="cyan" />
-
-          <!-- Suscripción -->
-          <NeonBox
-            borderClass={{ mobile: [1, 0, 0, 0], desktop: [1, 0, 0, 0] }}
-            class="w-full"
-          >
-            <SubscriptionBox color="cyan" />
-          </NeonBox>
         </NeonBox>
       </div>
     </div>

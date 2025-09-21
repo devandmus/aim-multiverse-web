@@ -1,10 +1,18 @@
-<footer
-  class="bg-base-dark text-base-light py-10 text-center border-t border-base-grey/30"
->
-  <p class="font-mono text-sm text-base-grey">
-    SYSTEM UPDATED • {new Date().toLocaleTimeString()}
-  </p>
-  <p class="mt-2 text-sm">
-    © {new Date().getFullYear()} Andrés Ignacio Maldonado
-  </p>
+---
+import SubscriptionBox from "./SubscriptionBox.astro";
+---
+
+<footer class="bg-base-dark text-base-light text-center relative">
+  <SubscriptionBox />
+  <div class="py-12" style="background-color: black;">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="font-mono text-sm text-base-grey">
+        SYSTEM UPDATED • {new Date().toLocaleTimeString()}
+      </p>
+      <p class="mt-2 text-sm">
+        © {new Date().getFullYear()} Andrés Ignacio Maldonado{" "}
+        <a href="/hub">@devandmus</a>
+      </p>
+    </div>
+  </div>
 </footer>

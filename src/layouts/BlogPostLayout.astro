@@ -1,11 +1,9 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import Footer from "../components/Footer.astro";
 import ArticleNavigation from "../components/ArticleNavigation.astro";
 import { getCollection } from "astro:content";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import SubscriptionBox from "../components/SubscriptionBox.astro";
 
 export interface Props {
   frontmatter: any;
@@ -203,10 +201,5 @@ const allPosts = await getCollection("blog");
 
     <!-- Navegación de artículos -->
     <ArticleNavigation currentPost={currentPost} allPosts={allPosts} />
-
-    <!-- Sección de suscripción -->
-    <SubscriptionBox color="cyan" />
   </main>
-
-  <Footer />
 </BaseLayout>

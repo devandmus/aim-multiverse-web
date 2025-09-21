@@ -10,8 +10,8 @@ export interface Props {
 }
 
 const {
-  title = "Suscríbete para recibir los mejores artículos",
-  subtitle = "(1-2/mes)",
+  title = "Suscríbete a la Newsletter",
+  subtitle = "Recibe noticias, artículos y promociones directo en tu correo electrónico",
   color = "pink",
 } = Astro.props;
 ---
@@ -131,7 +131,7 @@ const {
 
 <script>
   const API_ENDPOINT =
-    "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-c2d034fb-2562-411a-bd05-4c1282a4a049/default/subscribe-worker";
+    "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-c2d034fb-2562-411a-bd05-4c1282a4a049/default/subscribe-receiver";
 
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById(
@@ -245,9 +245,7 @@ const {
           "error",
         );
       } finally {
-        // Restore button state
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
+        submitButton.remove();
       }
     });
 
@@ -255,11 +253,6 @@ const {
       statusText.textContent = message;
       statusText.className = `text-sm ${type === "success" ? "text-green-400" : "text-red-400"}`;
       statusMessage.classList.remove("hidden");
-
-      // Auto-hide after 5 seconds
-      setTimeout(() => {
-        statusMessage.classList.add("hidden");
-      }, 5000);
     }
   });
 </script>
