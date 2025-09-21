@@ -3,7 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import NeonBox from "../components/atoms/NeonBox.astro";
 import Gradients from "../components/skeleton/Gradients.astro";
-import NeonButton from "../components/atoms/NeonButton.astro";
 import Wrapper from "../components/skeleton/Wrapper.astro";
 import ArticleCard from "../components/cards/ArticleCard.astro";
 import { getLatestPost, getColorByCategory, getPostUrl } from "../lib/blog";
@@ -63,11 +62,7 @@ const latestPost = await getLatestPost();
                 <!-- Contenido encima de la imagen -->
                 <div class="relative z-10 h-full text-white min-h-64">
                   <div class="absolute bottom-6 left-6">
-                    <a href="/about">
-                      <NeonBox class="p-6">
-                        <span class="font-bold">Sobre mí</span>
-                      </NeonBox>
-                    </a>
+                    <NeonLink href="/about" label="Sobre mí" />
                   </div>
                 </div>
               </div>
@@ -120,7 +115,7 @@ const latestPost = await getLatestPost();
             </div>
 
             <div>
-              <div>
+              <div class="pb-6">
                 <NeonLink href="/blog" transitionName="blog-page">
                   <h3
                     class="text-lg font-bold text-base-light flex items-center justify-center gap-3"
@@ -131,25 +126,6 @@ const latestPost = await getLatestPost();
                     AI • Dev • Música • Liderazgo
                   </p>
                 </NeonLink>
-              </div>
-              <div class="pb-6">
-                <a
-                  href="/blog"
-                  data-astro-prefetch
-                  class="relative blog-button text-neon-cyan font-bold"
-                >
-                  <!-- <NeonBox
-                    transitionName="blog-page"
-                    class="rounded-xl w-full"
-                    contentClass="p-6"
-                  >
-                    <div
-                      class="text-neon-cyan font-bold text-2xl flex items-center justify-center h-full w-full h-full"
-                    >
-                      Blog & Artículos
-                    </div>
-                  </NeonBox> -->
-                </a>
               </div>
 
               {

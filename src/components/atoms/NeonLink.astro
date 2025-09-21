@@ -2,7 +2,7 @@
 import NeonBox from "./NeonBox.astro";
 
 interface Props {
-  href: string;
+  href?: string;
   target?: string;
   rel?: string;
   color?: "pink" | "yellow" | "cyan" | "purple";
@@ -14,6 +14,8 @@ interface Props {
   };
   transitionName?: string;
   label?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 const {
@@ -26,20 +28,42 @@ const {
   borderClass,
   transitionName,
   label,
+  type,
+  disabled = false,
 } = Astro.props;
 ---
 
-<a href={href} target={target} rel={rel} class="neon-link group font-mono">
-  <NeonBox
-    class={className || "rounded-lg p-4 w-full text-center"}
-    contentClass={contentClass}
-    borderClass={borderClass}
-    transitionName={transitionName}
-    color={color}
-  >
-    {label ? label : <slot />}
-  </NeonBox>
-</a>
+{
+  type ? (
+    <button
+      type={type}
+      disabled={disabled}
+      class={`neon-link group font-mono border-none bg-transparent p-0 cursor-pointer ${className || ""}`}
+    >
+      <NeonBox
+        class="rounded-lg p-4 w-full text-center"
+        contentClass={contentClass}
+        borderClass={borderClass}
+        transitionName={transitionName}
+        color={color}
+      >
+        {label ? label : <slot />}
+      </NeonBox>
+    </button>
+  ) : (
+    <a href={href} target={target} rel={rel} class="neon-link group font-mono">
+      <NeonBox
+        class={className || "rounded-lg p-4 w-full text-center"}
+        contentClass={contentClass}
+        borderClass={borderClass}
+        transitionName={transitionName}
+        color={color}
+      >
+        {label ? label : <slot />}
+      </NeonBox>
+    </a>
+  )
+}
 
 <style>
   .neon-link {
@@ -48,8 +72,13 @@ const {
     text-decoration: none;
   }
 
-  .neon-link:hover {
+  .neon-link:hover:not(:disabled) {
     transform: translateY(-2px);
+  }
+
+  .neon-link:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   /* Efectos específicos por color */
