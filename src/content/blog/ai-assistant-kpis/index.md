@@ -2,26 +2,12 @@
 title: "Cómo construir un asistente de IA que realmente mueva KPIs"
 description: "Guía técnica completa para implementar asistentes de IA que impacten directamente en los indicadores clave de tu negocio"
 date: 2025-04-15
-tags: ["AI", "Automatización", "KPIs", "Productividad"]
 category: "AI"
-author: "Andrés Ignacio Maldonado"
-featured: true
 readingTime: "12 min"
-draft: false
 seo:
   title: "Asistente IA que mueva KPIs - Guía Técnica 2025"
   description: "Aprende a construir asistentes de IA que impacten directamente en tus KPIs empresariales con ejemplos reales y ROI"
   keywords: ["IA", "automatización", "KPIs", "productividad", "asistente virtual"]
-resources:
-  pdfs:
-    - "guia-implementacion-ia.md"
-    - "template-metricas-kpis.md"
-  images:
-    - "kpi-dashboard.png"
-    - "roi-chart.png"
-  codeExamples:
-    - "assistant-basic.py"
-    - "metrics-dashboard.js"
 ---
 ## El problema: IA sin impacto
 
@@ -40,10 +26,6 @@ resources:
 ## Metodología: De problema a solución
 
 ### 1. Identificar KPIs críticos
-
-<Callout type="tip" title="💡 Ejemplo Real">
-En una empresa SaaS, identificamos que el KPI más crítico era el "Time to First Value" (TTFV) de nuevos usuarios. Redujimos de 45 días a 12 días con un asistente de onboarding.
-</Callout>
 
 #### KPIs comunes por industria:
 - **SaaS**: Time to First Value, Churn Rate, MRR
@@ -336,16 +318,6 @@ Un asistente de IA que realmente mueva KPIs no es solo tecnología. Es:
 3. **Tecnología**: Implementar soluciones efectivas
 4. **Medición**: Seguir impacto continuamente
 
-<Callout type="success" title="🎯 Tu próximo paso">
-Identifica el KPI más crítico de tu negocio y el proceso que más lo afecta. Esa es tu oportunidad de oro para implementar IA con impacto real.
-</Callout>
-
 ---
 
 *¿Te gustó este artículo? Comparte tu experiencia con asistentes de IA en los comentarios.*
-
-## Recursos adicionales
-
-- [Guía de implementación de IA empresarial](./resources/guia-implementacion-ia.pdf)
-- [Template de métricas KPIs](./resources/template-metricas-kpis.pdf)
-- [Casos de estudio detallados](./resources/casos-estudio-detallados.pdf)
