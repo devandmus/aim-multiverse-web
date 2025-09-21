@@ -118,31 +118,10 @@ export async function getFeaturedPosts(includeDrafts: boolean = false): Promise<
  * @param category - Categoría del post
  * @returns Color correspondiente a la categoría
  */
+import { getColorByCategory as getColorByCategoryFromConfig } from "./tagConfig";
+
 export function getColorByCategory(category: string): "pink" | "yellow" | "cyan" | "purple" {
-    switch (category.toLowerCase()) {
-        case "ai":
-        case "artificial intelligence":
-        case "inteligencia artificial":
-            return "pink";
-        case "development":
-        case "tech":
-        case "programming":
-        case "desarrollo":
-        case "tecnología":
-            return "cyan";
-        case "leadership":
-        case "management":
-        case "liderazgo":
-        case "gestión":
-            return "yellow";
-        case "design":
-        case "ux":
-        case "ui":
-        case "diseño":
-            return "purple";
-        default:
-            return "cyan";
-    }
+    return getColorByCategoryFromConfig(category);
 }
 
 /**
@@ -228,80 +207,11 @@ export function getPostUrl(postId: string): string {
  * @param category - Categoría del post
  * @returns Color correspondiente al tag
  */
+import { getTagConfig } from "./tagConfig";
+
 export function getTagColor(tag: string, category: string): "pink" | "yellow" | "cyan" | "purple" {
-    // Mapeo específico de tags a colores
-    const tagColorMap: Record<string, "pink" | "yellow" | "cyan" | "purple"> = {
-        // Tags de AI
-        "AI": "pink",
-        "Inteligencia Artificial": "pink",
-        "Automatización": "pink",
-        "Machine Learning": "pink",
-        "ChatGPT": "pink",
-        "OpenAI": "pink",
-        "LLM": "pink",
-
-        // Tags de Desarrollo
-        "Desarrollo": "cyan",
-        "Programación": "cyan",
-        "JavaScript": "cyan",
-        "TypeScript": "cyan",
-        "React": "cyan",
-        "Astro": "cyan",
-        "Node.js": "cyan",
-        "Frontend": "cyan",
-        "Backend": "cyan",
-        "API": "cyan",
-        "Web": "cyan",
-        "Tech": "cyan",
-        "Código": "cyan",
-
-        // Tags de Liderazgo
-        "Liderazgo": "yellow",
-        "Management": "yellow",
-        "Gestión": "yellow",
-        "Equipos": "yellow",
-        "Teams": "yellow",
-        "Productividad": "yellow",
-        "Hábitos": "yellow",
-        "OKR": "yellow",
-        "KPIs": "yellow",
-        "Estrategia": "yellow",
-        "Negocio": "yellow",
-
-        // Tags de Diseño
-        "Diseño": "purple",
-        "UX": "purple",
-        "UI": "purple",
-        "Design": "purple",
-        "Experiencia": "purple",
-        "Usabilidad": "purple",
-        "Interface": "purple",
-
-        // Tags de Música
-        "Música": "pink",
-        "Guitarra": "pink",
-        "Audio": "pink",
-        "Producción": "pink",
-        "Sonido": "pink",
-
-        // Tags de Marketing
-        "Marketing": "yellow",
-        "Growth": "purple",
-        "Conversión": "yellow",
-        "SEO": "yellow",
-        "Analytics": "cyan",
-        "Performance": "cyan",
-        "Optimización": "cyan",
-    };
-
-    // Buscar el tag en el mapeo específico
-    const specificColor = tagColorMap[tag];
-    if (specificColor) {
-        return specificColor;
-    }
-
-    // Si no se encuentra, usar el color de la categoría
-    return getColorByCategory(category);
+    const config = getTagConfig(tag);
+    return config.color;
 }
 
 /**

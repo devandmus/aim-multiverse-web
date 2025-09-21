@@ -24,7 +24,7 @@ const { posts, class: className = "", gridColor = "cyan" } = Astro.props;
             title={post.data.title}
             tags={post.data.tags || []}
             color={getColorByCategory(post.data.category || "")}
-            description={post.data.readingTime}
+            readTime={post.data.readingTime}
             slug={getPostUrl(post.slug)}
             category={post.data.category || ""}
             id={post.slug}

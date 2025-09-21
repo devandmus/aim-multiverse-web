@@ -6,11 +6,12 @@
     <!-- Flecha de navegación hacia atrás -->
     <div
         id="back-arrow"
-        class="fixed top-6 left-6 z-60 pointer-events-auto opacity-0 transition-all duration-500 transform -translate-x-4"
+        class="fixed top-6 left-6 z-[999999] pointer-events-auto opacity-0 transition-all duration-500 transform -translate-x-4"
+        style="isolation: isolate; will-change: transform, opacity;"
     >
         <button
             id="back-btn"
-            class="group relative w-12 h-12 bg-black/80 backdrop-blur-xl border border-neon-cyan/50 rounded-full flex items-center justify-center hover:border-neon-cyan hover:bg-neon-cyan/10 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-neon-cyan/25"
+            class="group relative w-12 h-12 bg-black/80 backdrop-blur-xl border border-neon-cyan/50 rounded-full flex items-center justify-center hover:border-neon-cyan hover:bg-neon-cyan/10 transition-all duration-300 hover:scale-110 cursor-pointer"
         >
             <svg
                 class="w-6 h-6 text-neon-cyan group-hover:text-white transition-colors"
@@ -32,21 +33,22 @@
     <!-- Botón hamburguesa -->
     <div
         id="hamburger-trigger"
-        class="fixed top-6 right-6 z-60 pointer-events-auto"
+        class="fixed top-6 right-6 z-[999999] pointer-events-auto"
+        style="isolation: isolate; will-change: transform;"
     >
         <button
             id="menu-toggle"
-            class="group relative w-14 h-14 bg-black/80 backdrop-blur-xl border border-neon-pink/50 rounded-full flex items-center justify-center hover:border-neon-pink hover:bg-neon-pink/10 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-neon-pink/25"
+            class="group relative w-14 h-14 bg-black/80 backdrop-blur-xl border border-neon-pink/50 rounded-full flex items-center justify-center hover:border-neon-pink hover:bg-neon-pink/10 transition-all duration-300 hover:scale-110 cursor-pointer"
         >
-            <div class="relative w-6 h-6">
+            <div class="relative w-6 h-6" id="hamburger-icon">
                 <span
-                    class="absolute top-1 left-0 w-6 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white"
+                    class="absolute top-1 left-0 w-6 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white hamburger-line"
                 ></span>
                 <span
-                    class="absolute top-3 left-0 w-6 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white"
+                    class="absolute top-3 left-0 w-6 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white hamburger-line"
                 ></span>
                 <span
-                    class="absolute top-5 left-0 w-6 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white"
+                    class="absolute top-5 left-0 w-6 h-0.5 bg-neon-pink transition-all duration-300 group-hover:bg-white hamburger-line"
                 ></span>
             </div>
             <div
@@ -87,7 +89,7 @@
                 <!-- Suscríbete -->
                 <div class="menu-item group">
                     <button
-                        class="w-full p-3 bg-base-dark rounded-xl text-left"
+                        class="w-full p-3 bg-base-dark rounded-xl text-left cursor-pointer hover:bg-gradient-to-r hover:from-neon-cyan/5 hover:to-neon-pink/5 transition-all duration-300"
                     >
                         <div
                             class="w-6 h-6 mb-1"
@@ -116,7 +118,7 @@
                 <!-- Descarga gratis -->
                 <div class="menu-item group">
                     <button
-                        class="w-full p-3 bg-base-dark rounded-xl text-left"
+                        class="w-full p-3 bg-base-dark rounded-xl text-left cursor-pointer hover:bg-gradient-to-r hover:from-neon-pink/5 hover:to-neon-yellow/5 transition-all duration-300"
                     >
                         <div
                             class="w-6 h-6 mb-1"
@@ -142,7 +144,7 @@
                 <!-- Escucha música -->
                 <div class="menu-item group">
                     <button
-                        class="w-full p-3 bg-base-dark rounded-xl text-left"
+                        class="w-full p-3 bg-base-dark rounded-xl text-left cursor-pointer hover:bg-gradient-to-r hover:from-neon-yellow/5 hover:to-neon-cyan/5 transition-all duration-300"
                     >
                         <div
                             class="w-6 h-6 mb-1"
@@ -168,7 +170,7 @@
                 <!-- Agenda consultoría -->
                 <div class="menu-item group">
                     <button
-                        class="w-full p-3 bg-base-dark rounded-xl text-left"
+                        class="w-full p-3 bg-base-dark rounded-xl text-left cursor-pointer hover:bg-gradient-to-r hover:from-neon-cyan/5 hover:to-neon-pink/5 hover:to-neon-yellow/5 transition-all duration-300"
                     >
                         <div
                             class="w-6 h-6 mb-1"
@@ -211,18 +213,12 @@
                     <a
                         href="/"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-cyan/5 hover:to-transparent transition-all duration-300 hover:scale-105"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-cyan">
                             <svg fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
                                 ></path>
-                                <path
-                                    d="M12 6v6l4 2"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    fill="none"></path>
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-base-light mb-1">
@@ -237,19 +233,13 @@
                     <a
                         href="/blog"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-pink/5 hover:to-transparent transition-all duration-300 hover:scale-105"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-pink">
                             <svg fill="currentColor" viewBox="0 0 24 24">
                                 <path
-                                    d="M3 3h18v2H3V3zm0 4h18v2H3V7zm0 4h18v2H3v-2zm0 4h18v2H3v-2zm0 4h18v2H3v-2z"
+                                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
                                 ></path>
-                                <circle cx="6" cy="6" r="1" fill="currentColor"
-                                ></circle>
-                                <circle cx="6" cy="10" r="1" fill="currentColor"
-                                ></circle>
-                                <circle cx="6" cy="14" r="1" fill="currentColor"
-                                ></circle>
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-base-light mb-1">
@@ -266,18 +256,13 @@
                     <a
                         href="/proyectos"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-yellow/5 hover:to-transparent transition-all duration-300 hover:scale-105"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-yellow">
                             <svg fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
                                 ></path>
-                                <path
-                                    d="M8 12l2 2 4-4"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    fill="none"></path>
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-base-light mb-1">
@@ -294,18 +279,13 @@
                     <a
                         href="/servicios"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-cyan/5 hover:to-transparent transition-all duration-300 hover:scale-105"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-cyan">
                             <svg fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                                 ></path>
-                                <path
-                                    d="M8 12l2 2 4-4"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    fill="none"></path>
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-base-light mb-1">
@@ -322,18 +302,11 @@
                     <a
                         href="/media"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-pink/5 hover:to-transparent transition-all duration-300 hover:scale-105"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-pink">
                             <svg fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
-                                ></path>
-                                <path
-                                    d="M12 6v6l4 2"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    fill="none"></path>
+                                <path d="M8 5v14l11-7z"></path>
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-base-light mb-1">
@@ -350,23 +323,13 @@
                     <a
                         href="/recursos"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-yellow/5 hover:to-transparent transition-all duration-300 hover:scale-105"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-yellow">
                             <svg fill="currentColor" viewBox="0 0 24 24">
                                 <path
-                                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
+                                    d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
                                 ></path>
-                                <path
-                                    d="M14 2v6h6"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    fill="none"></path>
-                                <path
-                                    d="M16 13H8M16 17H8M10 9H8"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    fill="none"></path>
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-base-light mb-1">
@@ -383,23 +346,13 @@
                     <a
                         href="/eventos"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-cyan/5 hover:to-transparent transition-all duration-300 hover:scale-105"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-cyan">
                             <svg fill="currentColor" viewBox="0 0 24 24">
                                 <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                                    d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
                                 ></path>
-                                <path
-                                    d="M8 12l2 2 4-4"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    fill="none"></path>
-                                <circle
-                                    cx="12"
-                                    cy="12"
-                                    r="2"
-                                    fill="currentColor"></circle>
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-base-light mb-1">
@@ -416,18 +369,13 @@
                     <a
                         href="/sobre-mi"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-pink/5 hover:to-transparent transition-all duration-300 hover:scale-105"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-pink">
                             <svg fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
                                 ></path>
-                                <path
-                                    d="M12 6v6l4 2"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    fill="none"></path>
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-base-light mb-1">
@@ -444,18 +392,13 @@
                     <a
                         href="/contacto"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-yellow/5 hover:to-transparent transition-all duration-300 hover:scale-105"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-yellow">
                             <svg fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
                                 ></path>
-                                <path
-                                    d="M12 6v6l4 2"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    fill="none"></path>
                             </svg>
                         </div>
                         <h3 class="text-lg font-semibold text-base-light mb-1">
@@ -501,6 +444,9 @@
             // Detectar navegación
             this.trackNavigation();
 
+            // Manejar view transitions
+            this.handleViewTransitions();
+
             // Efectos de partículas
             // this.createParticleEffects(); // Destellos deshabilitados
         }
@@ -523,6 +469,12 @@
                 this.fullscreenMenu.style.pointerEvents = "auto";
                 this.fullscreenMenu.style.opacity = "1";
                 this.fullscreenMenu.style.scale = "1";
+
+                // Ocultar flecha de navegación
+                this.hideBackArrow();
+
+                // Convertir hamburguesa en X
+                this.transformHamburgerToX();
 
                 // Animar elementos del menú
                 const menuItems =
@@ -550,6 +502,13 @@
 
                 this.fullscreenMenu.style.opacity = "0";
                 this.fullscreenMenu.style.scale = "0.95";
+
+                // Restaurar flecha de navegación
+                this.trackNavigation();
+
+                // Convertir X de vuelta a hamburguesa
+                this.transformXToHamburger();
+
                 // Delay para permitir que la animación termine antes de deshabilitar pointer-events
                 setTimeout(() => {
                     if (this.fullscreenMenu) {
@@ -592,6 +551,8 @@
             if (this.backArrow) {
                 this.backArrow.style.opacity = "1";
                 this.backArrow.style.transform = "translateX(0)";
+                this.backArrow.style.visibility = "visible";
+                this.backArrow.style.pointerEvents = "auto";
             }
         }
 
@@ -599,6 +560,8 @@
             if (this.backArrow) {
                 this.backArrow.style.opacity = "0";
                 this.backArrow.style.transform = "translateX(-16px)";
+                this.backArrow.style.visibility = "hidden";
+                this.backArrow.style.pointerEvents = "none";
             }
         }
 
@@ -610,6 +573,71 @@
                 // Si no hay historial, ir a la página principal
                 window.location.href = "/";
             }
+        }
+
+        transformHamburgerToX() {
+            const hamburgerIcon = document.getElementById("hamburger-icon");
+            if (hamburgerIcon) {
+                const lines = hamburgerIcon.querySelectorAll(".hamburger-line");
+                if (lines.length === 3) {
+                    // Línea superior: rotar 45 grados y mover hacia el centro
+                    (lines[0] as HTMLElement).style.transform =
+                        "rotate(45deg) translate(0, 7px)";
+                    // Línea media: desaparecer
+                    (lines[1] as HTMLElement).style.opacity = "0";
+                    // Línea inferior: rotar -45 grados y mover hacia el centro
+                    (lines[2] as HTMLElement).style.transform =
+                        "rotate(-45deg) translate(0, -7px)";
+                }
+            }
+        }
+
+        transformXToHamburger() {
+            const hamburgerIcon = document.getElementById("hamburger-icon");
+            if (hamburgerIcon) {
+                const lines = hamburgerIcon.querySelectorAll(".hamburger-line");
+                if (lines.length === 3) {
+                    // Restaurar líneas a posición original
+                    (lines[0] as HTMLElement).style.transform =
+                        "rotate(0deg) translate(0, 0)";
+                    (lines[1] as HTMLElement).style.opacity = "1";
+                    (lines[2] as HTMLElement).style.transform =
+                        "rotate(0deg) translate(0, 0)";
+                }
+            }
+        }
+
+        handleViewTransitions() {
+            // Detectar cuando inician las view transitions
+            document.addEventListener("astro:before-preparation", () => {
+                // Asegurar que los elementos del menú mantengan su z-index
+                if (this.backArrow) {
+                    this.backArrow.style.zIndex = "999999";
+                    this.backArrow.style.isolation = "isolate";
+                }
+                if (this.menuToggle?.parentElement) {
+                    this.menuToggle.parentElement.style.zIndex = "999999";
+                    this.menuToggle.parentElement.style.isolation = "isolate";
+                }
+            });
+
+            // Detectar cuando terminan las view transitions
+            document.addEventListener("astro:after-swap", () => {
+                // Re-aplicar estilos después de la transición
+                setTimeout(() => {
+                    if (this.backArrow) {
+                        this.backArrow.style.zIndex = "999999";
+                        this.backArrow.style.isolation = "isolate";
+                    }
+                    if (this.menuToggle?.parentElement) {
+                        this.menuToggle.parentElement.style.zIndex = "999999";
+                        this.menuToggle.parentElement.style.isolation =
+                            "isolate";
+                    }
+                    // Re-trackear navegación después de la transición
+                    this.trackNavigation();
+                }, 100);
+            });
         }
 
         // Funciones de partículas eliminadas - destellos deshabilitados
@@ -721,10 +749,70 @@
         }
     }
 
-    /* Efectos de hover mejorados */
+    /* Efectos de hover mejorados sin sombras */
     .menu-item:hover {
         transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(0, 255, 247, 0.2);
+        border: 1px solid rgba(0, 255, 247, 0.3);
+        background: linear-gradient(
+            135deg,
+            rgba(0, 255, 247, 0.05),
+            rgba(255, 0, 160, 0.05)
+        );
+    }
+
+    /* Efectos de hover específicos para cada tipo de elemento */
+    .menu-item:nth-child(3n + 1):hover {
+        border-color: rgba(0, 255, 247, 0.3);
+        background: linear-gradient(
+            135deg,
+            rgba(0, 255, 247, 0.08),
+            transparent
+        );
+    }
+
+    .menu-item:nth-child(3n + 2):hover {
+        border-color: rgba(255, 0, 160, 0.3);
+        background: linear-gradient(
+            135deg,
+            rgba(255, 0, 160, 0.08),
+            transparent
+        );
+    }
+
+    .menu-item:nth-child(3n + 3):hover {
+        border-color: rgba(248, 243, 43, 0.3);
+        background: linear-gradient(
+            135deg,
+            rgba(248, 243, 43, 0.08),
+            transparent
+        );
+    }
+
+    /* Transiciones de hamburguesa a X */
+    .hamburger-line {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: center;
+    }
+
+    /* Asegurar máxima prioridad de apilamiento para elementos del menú */
+    #back-arrow,
+    #hamburger-trigger {
+        position: fixed !important;
+        z-index: 999999 !important;
+        isolation: isolate !important;
+        contain: layout style paint !important;
+    }
+
+    /* Override para view transitions */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        z-index: 999998;
+    }
+
+    /* Asegurar que el menú esté por encima de las view transitions */
+    #retro-menu-system {
+        z-index: 999999 !important;
+        isolation: isolate !important;
     }
 
     /* Efectos de partículas eliminados - destellos deshabilitados */

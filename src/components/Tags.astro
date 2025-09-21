@@ -1,5 +1,6 @@
 ---
 import { getTagsWithColors } from "../lib/blog";
+import { getTagDisplayName } from "../lib/tagConfig";
 
 export interface Props {
     tags: string[];
@@ -50,7 +51,7 @@ const currentSize = sizeClasses[size];
             <span
                 class={`${currentSize.padding} ${currentSize.text} font-semibold rounded-full ${colorClasses[color]}`}
             >
-                {tag}
+                {getTagDisplayName(tag)}
             </span>
         ))
     }

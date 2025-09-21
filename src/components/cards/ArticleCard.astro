@@ -14,10 +14,6 @@ export interface Props {
     id: string;
     category?: string;
     class?: string;
-    noBorderLeft?: boolean;
-    noBorderRight?: boolean;
-    noBorderTop?: boolean;
-    noBorderBottom?: boolean;
     transitionName?: string;
     titleSize?: string;
 }
@@ -33,10 +29,6 @@ const {
     id,
     category = "",
     class: className = "",
-    noBorderLeft = false,
-    noBorderRight = false,
-    noBorderTop = false,
-    noBorderBottom = false,
     transitionName = "",
     titleSize = "text-xl md:text-2xl",
 } = Astro.props;
@@ -74,10 +66,6 @@ const currentColor = colorClasses[color];
 <NeonBox
     class={`${className} rounded-xl`}
     color={color}
-    noBorderLeft={noBorderLeft}
-    noBorderRight={noBorderRight}
-    noBorderTop={noBorderTop}
-    noBorderBottom={noBorderBottom}
     transitionName={id ? `article-card-${id}` : ""}
 >
     <article
@@ -87,7 +75,7 @@ const currentColor = colorClasses[color];
         <div class="relative z-10 p-8">
             <div class="mb-4">
                 <Tags
-                    tags={tags}
+                    tags={[category]}
                     category={category}
                     size="medium"
                     style={id ? `view-transition-name: article-tags-${id}` : ""}
@@ -100,15 +88,21 @@ const currentColor = colorClasses[color];
                 {title}
             </h2>
             {
-                description && (
-                    <p
-                        class="text-base-grey mb-6"
-                        view-transition-name={
-                            id ? `article-description-${id}` : ""
-                        }
-                    >
-                        {description}
-                    </p>
+                readTime && (
+                    <div class="flex items-center gap-2 mb-6">
+                        <svg
+                            class={`w-4 h-4 ${currentColor.hoverText.replace("group-hover:", "")}`}
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                        <span class="text-sm text-base-grey">{readTime}</span>
+                    </div>
                 )
             }
             <div class="flex justify-end">
@@ -117,7 +111,7 @@ const currentColor = colorClasses[color];
                 >
                     <a href={slug} data-astro-prefetch>
                         <svg
-                            class="w-4 h-4 text-base-dark"
+                            class={`w-4 h-4 text-base-dark`}
                             fill="currentColor"
                             viewBox="0 0 20 20"
                         >
