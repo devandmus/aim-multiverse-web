@@ -237,7 +237,7 @@
                     <a
                         href="/"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-cyan/5 hover:to-transparent transition-all duration-300 hover:scale-105"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-neon-cyan/5 hover:to-neon-pink/5 transition-all duration-300"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-cyan">
                             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -257,7 +257,7 @@
                     <a
                         href="/blog"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-pink/5 hover:to-transparent transition-all duration-300 hover:scale-105"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-neon-pink/5 hover:to-neon-yellow/5 transition-all duration-300"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-pink">
                             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -280,7 +280,7 @@
                     <a
                         href="/proyectos"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-yellow/5 hover:to-transparent transition-all duration-300 hover:scale-105"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-neon-yellow/5 hover:to-neon-cyan/5 transition-all duration-300"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-yellow">
                             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -303,7 +303,7 @@
                     <a
                         href="/servicios"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-cyan/5 hover:to-transparent transition-all duration-300 hover:scale-105"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-neon-cyan/5 hover:to-neon-pink/5 transition-all duration-300"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-cyan">
                             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -326,7 +326,7 @@
                     <a
                         href="/media"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-pink/5 hover:to-transparent transition-all duration-300 hover:scale-105"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-neon-pink/5 hover:to-neon-yellow/5 transition-all duration-300"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-pink">
                             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -347,7 +347,7 @@
                     <a
                         href="/recursos"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-yellow/5 hover:to-transparent transition-all duration-300 hover:scale-105"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-neon-yellow/5 hover:to-neon-cyan/5 transition-all duration-300"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-yellow">
                             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -370,7 +370,7 @@
                     <a
                         href="/eventos"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-cyan/5 hover:to-transparent transition-all duration-300 hover:scale-105"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-neon-cyan/5 hover:to-neon-pink/5 transition-all duration-300"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-cyan">
                             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -393,7 +393,7 @@
                     <a
                         href="/sobre-mi"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-pink/5 hover:to-transparent transition-all duration-300 hover:scale-105"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-neon-pink/5 hover:to-neon-yellow/5 transition-all duration-300"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-pink">
                             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -416,7 +416,7 @@
                     <a
                         href="/contacto"
                         data-astro-prefetch
-                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-br hover:from-neon-yellow/5 hover:to-transparent transition-all duration-300 hover:scale-105"
+                        class="block p-4 bg-base-dark rounded-xl cursor-pointer hover:bg-gradient-to-r hover:from-neon-yellow/5 hover:to-neon-cyan/5 transition-all duration-300"
                     >
                         <div class="w-8 h-8 mb-2 text-neon-yellow">
                             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -769,6 +769,7 @@
     .menu-item:hover {
         transform: translateY(-5px) scale(1.02);
         border: 1px solid rgba(0, 255, 247, 0.3);
+        border-radius: 0px;
         background: linear-gradient(
             135deg,
             rgba(0, 255, 247, 0.05),
@@ -779,6 +780,7 @@
     /* Efectos de hover específicos para cada tipo de elemento */
     .menu-item:nth-child(3n + 1):hover {
         border-color: rgba(0, 255, 247, 0.3);
+        border-radius: 0px;
         background: linear-gradient(
             135deg,
             rgba(0, 255, 247, 0.08),
@@ -788,6 +790,7 @@
 
     .menu-item:nth-child(3n + 2):hover {
         border-color: rgba(255, 0, 160, 0.3);
+        border-radius: 0px;
         background: linear-gradient(
             135deg,
             rgba(255, 0, 160, 0.08),
@@ -797,6 +800,7 @@
 
     .menu-item:nth-child(3n + 3):hover {
         border-color: rgba(248, 243, 43, 0.3);
+        border-radius: 0px;
         background: linear-gradient(
             135deg,
             rgba(248, 243, 43, 0.08),
@@ -840,4 +844,10 @@
     }
 
     /* Efectos de partículas eliminados - destellos deshabilitados */
+
+    /* Efecto de border-radius: 0 en hover para todos los botones del menú */
+    #fullscreen-menu .menu-item button:hover,
+    #fullscreen-menu .menu-item a:hover {
+        border-radius: 0px !important;
+    }
 </style>
