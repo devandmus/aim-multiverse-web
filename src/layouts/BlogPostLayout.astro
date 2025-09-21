@@ -4,6 +4,8 @@ import ArticleNavigation from "../components/ArticleNavigation.astro";
 import { getCollection } from "astro:content";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { Image } from "astro:assets";
+import andresCuadrado from "../assets/images/andres-cuadrado.jpg";
 
 export interface Props {
   frontmatter: any;
@@ -56,9 +58,11 @@ const allPosts = await getCollection("blog");
                   <div
                     class="w-12 h-12 rounded-full overflow-hidden border-2 border-neon-cyan"
                   >
-                    <img
-                      src="/images/andres-cuadrado.jpg"
+                    <Image
+                      src={andresCuadrado}
                       alt="Andrés Maldonado"
+                      width={96}
+                      height={96}
                       class="w-full h-full object-cover"
                     />
                   </div>
