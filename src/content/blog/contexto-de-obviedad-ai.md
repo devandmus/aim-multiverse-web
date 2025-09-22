@@ -6,7 +6,7 @@ category: "AI"
 seo:
   title: "Contexto de obviedad: El reto invisible en la inteligencia artificial"
   description: "Descubre cómo el contexto de obviedad afecta la forma en que los modelos de IA comprenden y generan respuestas, y qué significa para su entrenamiento y uso."
-  keywords: \["contexto de obviedad", "inteligencia artificial", "sesgos", "IA generativa", "GPT", "procesamiento de lenguaje"]
+  keywords: ["contexto de obviedad", "inteligencia artificial", "sesgos", "IA generativa", "GPT", "procesamiento de lenguaje"]
 ---
 
 En el mundo de la comunicación humana, mucho de lo que decimos está impregnado de un **contexto de obviedad**: información que no explicitamos porque asumimos que la otra persona la comparte o la entiende implícitamente. En la inteligencia artificial generativa, esta dimensión es crítica, pues los modelos carecen de sentido común humano y dependen estrictamente de los datos y las instrucciones que reciben.

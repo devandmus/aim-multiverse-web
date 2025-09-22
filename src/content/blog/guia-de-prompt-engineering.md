@@ -6,7 +6,7 @@ category: "AI"
 seo:
   title: "Prompt Engineering: Guía estratégica para dominar la IA generativa"
   description: "Aprende qué es el prompt engineering, sus técnicas, casos de uso y mejores prácticas para obtener resultados precisos con modelos de IA como ChatGPT."
-  keywords: \["prompt engineering", "IA generativa", "ChatGPT", "prompts", "ingeniería de prompts", "técnicas de prompts"]
+  keywords: ["prompt engineering", "IA generativa", "ChatGPT", "prompts", "ingeniería de prompts", "técnicas de prompts"]
 ---
 
 El **prompt engineering** se ha convertido en una de las habilidades más demandadas en el ecosistema de la inteligencia artificial generativa. Aunque pueda parecer simple “dar instrucciones a una IA”, la realidad es que la forma en que se diseña un prompt puede transformar radicalmente la calidad, precisión y creatividad de la respuesta. Este artículo explora qué es, cómo funciona y qué técnicas avanzadas están marcando tendencia.
