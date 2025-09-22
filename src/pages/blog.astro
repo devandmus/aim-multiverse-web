@@ -5,7 +5,7 @@ import Wrapper from "../components/skeleton/Wrapper.astro";
 import ArticlesGrid from "../components/ArticlesGrid.astro";
 import { getAllPosts } from "../lib/blog";
 
-// Obtener artículos para mostrar en el blog
+// Obtener artículos para mostrar en el blog con tiempo de lectura calculado automáticamente
 const allPosts = await getAllPosts();
 const publishedPosts = allPosts;
 ---

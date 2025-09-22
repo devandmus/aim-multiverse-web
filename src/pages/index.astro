@@ -10,7 +10,7 @@ import { Image } from "astro:assets";
 import andresMacbook from "../assets/images/andres-macbook.jpg";
 import andresGuitarra from "../assets/images/andres-guitarra.jpeg";
 import NeonLink from "../components/atoms/NeonLink.astro";
-// Obtener el artículo más reciente del blog
+// Obtener el artículo más reciente del blog con tiempo de lectura calculado automáticamente
 const latestPost = await getLatestPost();
 ---
 
@@ -139,10 +139,7 @@ const latestPost = await getLatestPost();
                     titleSize="text-2xl md:text-3xl"
                     tags={latestPost.data.tags || []}
                     color={getColorByCategory(latestPost.data.category || "")}
-                    readTime={
-                      latestPost.data.readingTime ||
-                      `${Math.ceil(Math.random() * 15 + 5)} min`
-                    }
+                    readTime={latestPost.data.readingTime}
                     url={getPostUrl(latestPost.slug)}
                     category={latestPost.data.category || ""}
                   />

@@ -12,86 +12,20 @@ export const TAG_CONFIGS: TagConfig[] = [
         color: "pink",
         displayName: "AI"
     },
-    {
-        name: "Artificial Intelligence",
-        color: "pink",
-        displayName: "AI"
-    },
-    {
-        name: "Inteligencia Artificial",
-        color: "pink",
-        displayName: "AI"
-    },
 
     // Desarrollo & Tech
-    {
-        name: "Development",
-        color: "cyan",
-        displayName: "Dev"
-    },
+
     {
         name: "Tech",
         color: "cyan",
-        displayName: "Dev"
-    },
-    {
-        name: "Programming",
-        color: "cyan",
-        displayName: "Dev"
-    },
-    {
-        name: "Desarrollo",
-        color: "cyan",
-        displayName: "Dev"
-    },
-    {
-        name: "Tecnología",
-        color: "cyan",
-        displayName: "Dev"
+        displayName: "Tech"
     },
 
     // Liderazgo & Management
     {
         name: "Leadership",
         color: "yellow",
-        displayName: "Liderazgo"
-    },
-    {
-        name: "Management",
-        color: "yellow",
-        displayName: "Liderazgo"
-    },
-    {
-        name: "Liderazgo",
-        color: "yellow",
-        displayName: "Liderazgo"
-    },
-    {
-        name: "Gestión",
-        color: "yellow",
-        displayName: "Liderazgo"
-    },
-
-    // Design & UX
-    {
-        name: "Design",
-        color: "purple",
-        displayName: "Design"
-    },
-    {
-        name: "UX",
-        color: "purple",
-        displayName: "Design"
-    },
-    {
-        name: "UI",
-        color: "purple",
-        displayName: "Design"
-    },
-    {
-        name: "Diseño",
-        color: "purple",
-        displayName: "Design"
+        displayName: "Leadership"
     },
 
     // Marketing & Growth
@@ -100,32 +34,12 @@ export const TAG_CONFIGS: TagConfig[] = [
         color: "yellow",
         displayName: "Marketing"
     },
-    {
-        name: "Growth",
-        color: "yellow",
-        displayName: "Growth"
-    },
-    {
-        name: "Conversión",
-        color: "yellow",
-        displayName: "Growth"
-    },
 
     // Música & Creatividad
     {
-        name: "Música",
-        color: "purple",
-        displayName: "Música"
-    },
-    {
         name: "Music",
         color: "purple",
-        displayName: "Música"
-    },
-    {
-        name: "Creatividad",
-        color: "purple",
-        displayName: "Música"
+        displayName: "Music"
     }
 ];
 

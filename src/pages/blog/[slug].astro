@@ -1,21 +1,20 @@
 ---
 import { getCollection } from "astro:content";
 import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
+import { getAllPosts } from "../../lib/blog";
 import {
-    ImageCarousel,
-    VideoEmbed,
-    CodeBlock,
-    Callout,
+  ImageCarousel,
+  VideoEmbed,
+  CodeBlock,
+  Callout,
 } from "../../components/markdown";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blog");
-    return posts
-        .filter((post) => !post.data.draft)
-        .map((post) => ({
-            params: { slug: post.slug },
-            props: { post },
-        }));
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
 }
 
 const { post } = Astro.props;
@@ -23,17 +22,17 @@ const { Content } = await post.render();
 ---
 
 <BlogPostLayout
-    frontmatter={post.data}
-    url={Astro.url.pathname}
-    currentPost={post}
+  frontmatter={post.data}
+  url={Astro.url.pathname}
+  currentPost={post}
 >
-    <Content
-        components={{
-            // Componentes existentes
-            ImageCarousel,
-            VideoEmbed,
-            CodeBlock,
-            Callout,
-        }}
-    />
+  <Content
+    components={{
+      // Componentes existentes
+      ImageCarousel,
+      VideoEmbed,
+      CodeBlock,
+      Callout,
+    }}
+  />
 </BlogPostLayout>
