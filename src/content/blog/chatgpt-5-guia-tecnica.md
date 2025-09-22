@@ -177,7 +177,7 @@ Ahora no solo escribimos código, sino que diseñamos **experiencias inteligente
 
 ---
 
-### Fuentes y recursos recomendados
+### Fuentes
 - [OpenAI API Docs](https://platform.openai.com/docs)
 - [MDN Web Docs](https://developer.mozilla.org/)
 - [Awesome ChatGPT Prompts](https://github.com/f/awesome-chatgpt-prompts)

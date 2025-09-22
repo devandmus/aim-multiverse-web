@@ -37,7 +37,7 @@ GTD es un método de gestión personal diseñado para capturar todas las tareas,
 
 ## GTD, liderazgo y estrategia
 
-Un líder que aplica GTD no solo gana control personal, sino que modela claridad para su equipo. Así como un desarrollador necesita estructuras de control en JavaScript para evitar caos en el código【10†estructuras-de-control-en-javascript.md】, un líder necesita un sistema como GTD para evitar dispersión en la ejecución. La metodología fomenta:
+Un líder que aplica GTD no solo gana control personal, sino que modela claridad para su equipo. Así como un desarrollador necesita estructuras de control en JavaScript para evitar caos en el código, un líder necesita un sistema como GTD para evitar dispersión en la ejecución. La metodología fomenta:
 
 - **Transparencia**: todos saben qué se está haciendo y qué sigue.
 - **Responsabilidad compartida**: cada compromiso queda registrado, no en la memoria.
@@ -52,7 +52,7 @@ Un líder que aplica GTD no solo gana control personal, sino que modela claridad
 ## Conexiones con otras disciplinas
 
 - **Música**: Como una partitura bien escrita, GTD permite interpretar sin perderse en la complejidad.
-- **Desarrollo**: Similar a manejar la pila de ejecución en JavaScript【12†pila-de-ejecucion-de-javascript.md】, GTD ayuda a procesar tareas en orden sin colapsar tu capacidad de atención.
+- **Desarrollo**: Similar a manejar una pila de ejecución, GTD ayuda a procesar tareas en orden sin colapsar tu capacidad de atención.
 - **Marketing digital**: Permite priorizar campañas y acciones sin ahogarse en métricas dispersas.
 - **IA generativa**: Un buen sistema GTD puede potenciarse con asistentes de IA que automaticen capturas, resúmenes y recordatorios.
 
@@ -62,7 +62,7 @@ GTD no es una lista de tareas, es un sistema de pensamiento y acción. Su mayor 
 
 ---
 
-## Referencias
+### Fuentes
 
 - David Allen (2001). *Getting Things Done: The Art of Stress-Free Productivity*. Penguin Books.
 - Allen, D. (2015). *Making It All Work: Winning at the Game of Work and Business of Life*. Penguin Books.

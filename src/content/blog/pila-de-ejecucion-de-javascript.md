@@ -433,3 +433,4 @@ Entender estos conceptos te ayudará a escribir código más eficiente y a debug
 - [MDN Web Docs - Event Loop](https://developer.mozilla.org/es/docs/Web/JavaScript/EventLoop)
 - [JavaScript.info - Event Loop](https://javascript.info/event-loop)
 - [Philip Roberts - What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+
