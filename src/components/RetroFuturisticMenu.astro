@@ -2,12 +2,36 @@
 import NeonLink from "./atoms/NeonLink.astro";
 ---
 
+<style>
+  /* Estilos críticos para evitar parpadeo */
+  #retro-menu-system {
+    z-index: 999999 !important;
+    isolation: isolate !important;
+  }
+
+  #hamburger-trigger {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  #back-arrow {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.5s ease,
+      visibility 0.5s ease;
+  }
+</style>
+
 <div id="retro-menu-system" class="fixed inset-0 z-50 pointer-events-none">
   <!-- Flecha de navegación hacia atrás -->
   <div
     id="back-arrow"
     class="fixed top-6 left-6 pointer-events-auto opacity-0 transition-all duration-500 transform"
-    style="isolation: isolate; will-change: transform, opacity;"
+    style="isolation: isolate; will-change: transform, opacity; visibility: hidden;"
   >
     <button
       id="back-btn"
@@ -34,7 +58,7 @@ import NeonLink from "./atoms/NeonLink.astro";
   <div
     id="hamburger-trigger"
     class="fixed top-6 right-6 pointer-events-auto"
-    style="isolation: isolate; will-change: transform;"
+    style="isolation: isolate; will-change: transform; opacity: 0; visibility: hidden;"
   >
     <button
       id="menu-toggle"
@@ -211,6 +235,9 @@ import NeonLink from "./atoms/NeonLink.astro";
       this.fullscreenMenu = document.getElementById("fullscreen-menu");
       // CTAs flotantes eliminados
 
+      // Inicializar visibilidad inmediatamente para evitar parpadeo
+      this.initializeVisibility();
+
       // Event listeners
       this.menuToggle?.addEventListener("click", () => this.toggleMenu());
       document
@@ -291,6 +318,17 @@ import NeonLink from "./atoms/NeonLink.astro";
           }
         }, 700);
       }
+    }
+
+    initializeVisibility() {
+      // Mostrar el botón hamburguesa inmediatamente
+      if (this.menuToggle?.parentElement) {
+        this.menuToggle.parentElement.style.opacity = "1";
+        this.menuToggle.parentElement.style.visibility = "visible";
+      }
+
+      // Inicializar la flecha de navegación
+      this.trackNavigation();
     }
 
     trackNavigation() {
