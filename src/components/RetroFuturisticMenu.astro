@@ -2,36 +2,12 @@
 import NeonLink from "./atoms/NeonLink.astro";
 ---
 
-<style>
-  /* Estilos críticos para evitar parpadeo */
-  #retro-menu-system {
-    z-index: 999999 !important;
-    isolation: isolate !important;
-  }
-
-  #hamburger-trigger {
-    opacity: 0;
-    visibility: hidden;
-    transition:
-      opacity 0.3s ease,
-      visibility 0.3s ease;
-  }
-
-  #back-arrow {
-    opacity: 0;
-    visibility: hidden;
-    transition:
-      opacity 0.5s ease,
-      visibility 0.5s ease;
-  }
-</style>
-
 <div id="retro-menu-system" class="fixed inset-0 z-50 pointer-events-none">
   <!-- Flecha de navegación hacia atrás -->
   <div
     id="back-arrow"
-    class="fixed top-6 left-6 pointer-events-auto opacity-0 transition-all duration-500 transform"
-    style="isolation: isolate; will-change: transform, opacity; visibility: hidden;"
+    class="fixed top-6 left-6 pointer-events-auto transform"
+    style="isolation: isolate; will-change: transform; opacity: 0; transform: translateX(-16px); visibility: hidden; pointer-events: none;"
   >
     <button
       id="back-btn"
@@ -58,7 +34,7 @@ import NeonLink from "./atoms/NeonLink.astro";
   <div
     id="hamburger-trigger"
     class="fixed top-6 right-6 pointer-events-auto"
-    style="isolation: isolate; will-change: transform; opacity: 0; visibility: hidden;"
+    style="isolation: isolate; will-change: transform;"
   >
     <button
       id="menu-toggle"
@@ -223,6 +199,7 @@ import NeonLink from "./atoms/NeonLink.astro";
     menuToggle: HTMLElement | null = null;
     fullscreenMenu: HTMLElement | null = null;
     floatingCtas: HTMLElement | null = null;
+    hasUsedBackArrow: boolean = false;
 
     constructor() {
       this.init();
@@ -321,14 +298,13 @@ import NeonLink from "./atoms/NeonLink.astro";
     }
 
     initializeVisibility() {
-      // Mostrar el botón hamburguesa inmediatamente
-      if (this.menuToggle?.parentElement) {
-        this.menuToggle.parentElement.style.opacity = "1";
-        this.menuToggle.parentElement.style.visibility = "visible";
+      // Solo inicializar si no hay estilos inline aplicados (evitar conflicto con script inline)
+      const hasInlineStyles = document.querySelector(
+        "style[data-back-arrow-inline]",
+      );
+      if (!hasInlineStyles) {
+        this.trackNavigation();
       }
-
-      // Inicializar la flecha de navegación
-      this.trackNavigation();
     }
 
     trackNavigation() {
@@ -362,6 +338,13 @@ import NeonLink from "./atoms/NeonLink.astro";
 
     showBackArrow() {
       if (this.backArrow) {
+        // Solo aplicar transición si ya se ha usado la flecha antes
+        if (this.hasUsedBackArrow) {
+          this.backArrow.style.transition = "all 0.5s ease";
+        } else {
+          this.backArrow.style.transition = "none";
+        }
+
         this.backArrow.style.opacity = "1";
         this.backArrow.style.transform = "translateX(0)";
         this.backArrow.style.visibility = "visible";
@@ -379,6 +362,9 @@ import NeonLink from "./atoms/NeonLink.astro";
     }
 
     goBack() {
+      // Marcar que se ha usado la flecha para futuras transiciones
+      this.hasUsedBackArrow = true;
+
       // Usar el historial del navegador para volver atrás
       if (window.history.length > 1) {
         window.history.back();
@@ -615,12 +601,6 @@ import NeonLink from "./atoms/NeonLink.astro";
   ::view-transition-old(root),
   ::view-transition-new(root) {
     z-index: 999998;
-  }
-
-  /* Asegurar que el menú esté por encima de las view transitions */
-  #retro-menu-system {
-    z-index: 999999 !important;
-    isolation: isolate !important;
   }
 
   /* Efectos de partículas eliminados - destellos deshabilitados */

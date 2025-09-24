@@ -98,5 +98,42 @@ const prefetchLinks = posts.map((post) => ({
     <!-- Suscripción -->
 
     <Footer />
+
+    <!-- Script inline para mostrar backArrow inmediatamente cuando hay historial -->
+    <script>
+      // Detectar historial inmediatamente para evitar parpadeo
+      (function () {
+        const isHomePage =
+          window.location.pathname === "/" ||
+          window.location.pathname === "/index.html" ||
+          window.location.pathname === "";
+
+        if (!isHomePage) {
+          const hasValidReferrer =
+            document.referrer &&
+            document.referrer !== window.location.href &&
+            document.referrer !== window.location.origin + "/" &&
+            document.referrer !== window.location.origin;
+
+          const hasHistory = window.history.length > 1;
+
+          if (hasValidReferrer || hasHistory) {
+            // Aplicar estilos inmediatamente para mostrar la flecha sin fade in
+            const style = document.createElement("style");
+            style.setAttribute("data-back-arrow-inline", "true");
+            style.textContent = `
+              #back-arrow {
+                opacity: 1 !important;
+                transform: translateX(0) !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+                transition: none !important;
+              }
+            `;
+            document.head.appendChild(style);
+          }
+        }
+      })();
+    </script>
   </body>
 </html>
